@@ -1,37 +1,56 @@
 package com.jvmless.mrsandwich.client;
 
 
+import com.jvmless.mrsandwich.client.infrastructure.ClientRepositoryInMemory;
+import org.hamcrest.Matchers;
+import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Optional;
+import java.util.UUID;
+
 import static org.mockito.Mockito.*;
 
 public class ClientFacadeTest {
-    @Mock
-    ClientRepository clientRepository;
+
+    ClientRepository clientRepository = new ClientRepositoryInMemory();
 
     ClientFacade clientFacade;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         clientFacade = ClientFacade.of(clientRepository);
+        String clientId = "ALREADY IN DB";
+        RegisterClientDto clientDto = new RegisterClientDto(clientId);
+        clientFacade.registerClient(clientDto);
     }
 
     @Test(expected = ClientRegisterException.class)
     public void testRegisterClient() {
-        RegisterClientDto clientDto = new RegisterClientDto("clientId");
-        when(clientRepository.save(Client.by(clientDto))).thenThrow(new RuntimeException("Id already in database"));
+        String clientId = "ALREADY IN DB";
+        RegisterClientDto clientDto = new RegisterClientDto(clientId);
         clientFacade.registerClient(clientDto);
     }
 
     @Test
-    public void testDisableClient() throws Exception {
-        clientFacade.disableClient(new DisableClientDto("clientId"));
+    public void testDisableClient() {
+        String clientId = UUID.randomUUID().toString();
+        RegisterClientDto clientDto = new RegisterClientDto(clientId);
+        clientFacade.registerClient(clientDto);
+        DisableClientDto disableClientDto = new DisableClientDto(clientId);
+        clientFacade.disableClient(disableClientDto);
+        Optional<Client> after = clientRepository.findById(clientId);
+        Assert.assertThat(after.get().isEnable(), Matchers.is(false));
     }
 
+    @After
+    public void cleanUp() {
+        clientRepository.removeAll();
+    }
 }
 
 //Generated with love by TestMe :) Please report issues and submit feature requests at: http://weirddev.com/forum#!/testme

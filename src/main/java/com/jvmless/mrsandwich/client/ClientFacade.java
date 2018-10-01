@@ -26,7 +26,7 @@ public class ClientFacade {
        saved.ifPresent(x -> {
            if(x.isEnable()){
                x.disable();
-               clientRepository.save(x);
+               clientRepository.update(x);
            } else {
                throw new ClientAlreadyDisabledException();
            }
