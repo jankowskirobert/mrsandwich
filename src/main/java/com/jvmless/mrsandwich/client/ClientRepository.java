@@ -1,6 +1,14 @@
 package com.jvmless.mrsandwich.client;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import java.util.Optional;
 
-public interface ClientRepository extends MongoRepository<Client, String> {
+/*
+    Make Mongo through adapter
+ */
+public interface ClientRepository {
+    Optional<Client> findById(String clientId);
+    Client save(Client x);
+    Client update(Client x);
+
+    void removeAll();
 }
