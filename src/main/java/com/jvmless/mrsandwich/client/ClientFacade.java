@@ -28,7 +28,7 @@ public class ClientFacade {
                x.disable();
                clientRepository.save(x);
            } else {
-               throw new ClientAlreadyDisabled();
+               throw new ClientAlreadyDisabledException();
            }
        });
     }
