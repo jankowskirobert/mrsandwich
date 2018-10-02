@@ -24,13 +24,22 @@ public class ClientFacade {
     public void disableClient(@NonNull DisableClientDto dto) {
        Optional<Client> saved = clientRepository.findById(dto.getClientId());
        saved.ifPresent(x -> {
-           if(x.isEnable()){
+
                x.disable();
                clientRepository.update(x);
-           } else {
-               throw new ClientAlreadyDisabledException();
-           }
+
        });
+    }
+
+    public void addSellerToObserverList(@NonNull AddSellerDto dto) {
+        Optional<Client> saved = clientRepository.findById(dto.getClientId());
+        saved.ifPresent(x -> {
+            if(x.isEnable()){
+
+            } else {
+                throw new ClientAlreadyDisabledException();
+            }
+        });
     }
     /*
     Add seller id to observer list,
@@ -39,4 +48,8 @@ public class ClientFacade {
         return new ArrayList<>();
     }
 
+    /*
+    client ma db clienta / seller ma db sellera
+    client ma osobne commandy do dodania
+     */
 }

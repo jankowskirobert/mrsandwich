@@ -4,7 +4,10 @@ import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
 /*
     add mapping to another model that contains mongodb annotations
  */
@@ -16,13 +19,14 @@ public class Client {
     private ClientStatus status;
     private LocalDateTime terminated;
     private LocalDateTime created;
+    private Set<Seller> observerSellers;
 
     public String id() {
         return clientId;
     }
 
     public static Client by(@NonNull RegisterClientDto dto) {
-        return new Client(dto.getClientId(), ClientStatus.ENABLE, null, LocalDateTime.now());
+        return new Client(dto.getClientId(), ClientStatus.ENABLE, null, LocalDateTime.now(), new HashSet<>());
     }
 
     public boolean isEnable() {
@@ -32,8 +36,15 @@ public class Client {
     }
 
     public void disable() {
+        if(this.status.equals(ClientStatus.DISABLE))
+            throw new ClientAlreadyDisabledException();
         this.status = ClientStatus.DISABLE;
         terminated = LocalDateTime.now();
+    }
+
+    public void observerSeller(Seller seller){
+        seller.markAsObserved();
+        this.observerSellers.add(seller);
     }
 
     @Override
