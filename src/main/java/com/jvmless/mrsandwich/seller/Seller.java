@@ -2,7 +2,7 @@ package com.jvmless.mrsandwich.seller;
 
 import java.util.List;
 
-public class Seller {
+class Seller {
     private String id;
     private PersonalData personalData;
     private Area area;
