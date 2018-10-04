@@ -26,7 +26,7 @@ class Client {
     private LocalDateTime terminated;
     private LocalDateTime created;
     @DBRef
-    private Set<Seller> observerSellers;
+    private Set<Correlation> observerCorrelations;
 
     public String id() {
         return clientId;
@@ -49,9 +49,8 @@ class Client {
         terminated = LocalDateTime.now();
     }
 
-    public void observerSeller(Seller seller){
-        seller.markAsObserved();
-        if(!this.observerSellers.add(seller)){
+    public void observerSeller(Correlation correlation){
+        if(!this.observerCorrelations.add(correlation)){
             throw new SellerAlreadyOnListException();
         }
     }

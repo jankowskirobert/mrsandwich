@@ -38,7 +38,7 @@ public class ClientFacade {
         Optional<Client> saved = clientRepository.findById(dto.getClientId());
         saved.ifPresent(x -> {
             if(x.isEnable()){
-                x.observerSeller(Seller.of(dto.getSellerId()));
+                x.observerSeller(Correlation.of(dto.getSellerId()));
             } else {
                 throw new ClientDisabledException();
             }
