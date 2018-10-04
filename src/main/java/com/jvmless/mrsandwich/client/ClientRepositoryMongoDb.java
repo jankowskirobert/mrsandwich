@@ -1,4 +1,4 @@
-package com.jvmless.mrsandwich.client.infrastructure;
+package com.jvmless.mrsandwich.client;
 
 import com.jvmless.mrsandwich.client.Client;
 import org.springframework.data.mongodb.repository.MongoRepository;

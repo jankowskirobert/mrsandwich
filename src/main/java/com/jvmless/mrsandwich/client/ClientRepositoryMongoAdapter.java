@@ -1,7 +1,8 @@
-package com.jvmless.mrsandwich.client.infrastructure;
+package com.jvmless.mrsandwich.client;
 
 import com.jvmless.mrsandwich.client.Client;
 import com.jvmless.mrsandwich.client.ClientRepository;
+import com.jvmless.mrsandwich.client.ClientRepositoryMongoDb;
 
 import java.util.Optional;
 

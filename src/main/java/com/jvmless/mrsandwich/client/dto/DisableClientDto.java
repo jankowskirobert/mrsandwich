@@ -1,4 +1,4 @@
-package com.jvmless.mrsandwich.client;
+package com.jvmless.mrsandwich.client.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-class RegisterClientDto {
+public class DisableClientDto {
     private String clientId;
 }

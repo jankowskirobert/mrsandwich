@@ -1,6 +1,7 @@
-package com.jvmless.mrsandwich.client.infrastructure;
+package com.jvmless.mrsandwich.client;
 
 import com.jvmless.mrsandwich.client.ClientRepository;
+import com.jvmless.mrsandwich.client.ClientRepositoryInMemory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

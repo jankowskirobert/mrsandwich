@@ -1,4 +1,4 @@
-package com.jvmless.mrsandwich.client.infrastructure;
+package com.jvmless.mrsandwich.client;
 
 import com.jvmless.mrsandwich.client.Client;
 import com.jvmless.mrsandwich.client.ClientRepository;
@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
-public class ClientRepositoryInMemory implements ClientRepository {
+class ClientRepositoryInMemory implements ClientRepository {
     private Map<String, Client> inMemoryRepository = new ConcurrentHashMap<>();
 
     @Override

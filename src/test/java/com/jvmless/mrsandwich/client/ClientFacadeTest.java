@@ -1,19 +1,17 @@
 package com.jvmless.mrsandwich.client;
 
 
-import com.jvmless.mrsandwich.client.infrastructure.ClientRepositoryInMemory;
+import com.jvmless.mrsandwich.client.dto.DisableClientDto;
+import com.jvmless.mrsandwich.client.dto.RegisterClientDto;
+import com.jvmless.mrsandwich.client.exceptions.ClientRegisterException;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 import java.util.UUID;
-
-import static org.mockito.Mockito.*;
 
 public class ClientFacadeTest {
 
@@ -45,6 +43,15 @@ public class ClientFacadeTest {
         clientFacade.disableClient(disableClientDto);
         Optional<Client> after = clientRepository.findById(clientId);
         Assert.assertThat(after.get().isEnable(), Matchers.is(false));
+    }
+
+    @Test
+    public void testAddSellerToObserverList(){
+        String clientId = UUID.randomUUID().toString();
+        String sellerId = UUID.randomUUID().toString();
+        Client client = Client.by(new RegisterClientDto(clientId));
+        Seller seller = Seller.of(sellerId);
+        client.observerSeller(seller);
     }
 
     @After

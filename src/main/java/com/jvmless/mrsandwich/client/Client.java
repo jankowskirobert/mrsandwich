@@ -1,6 +1,11 @@
 package com.jvmless.mrsandwich.client;
 
+import com.jvmless.mrsandwich.client.dto.RegisterClientDto;
+import com.jvmless.mrsandwich.client.exceptions.ClientAlreadyDisabledException;
+import com.jvmless.mrsandwich.client.exceptions.SellerAlreadyOnListException;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -14,11 +19,13 @@ import java.util.Set;
 @Document(collection = "client")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Client {
+class Client {
+    @Id
     private String clientId;
     private ClientStatus status;
     private LocalDateTime terminated;
     private LocalDateTime created;
+    @DBRef
     private Set<Seller> observerSellers;
 
     public String id() {
@@ -44,7 +51,9 @@ public class Client {
 
     public void observerSeller(Seller seller){
         seller.markAsObserved();
-        this.observerSellers.add(seller);
+        if(!this.observerSellers.add(seller)){
+            throw new SellerAlreadyOnListException();
+        }
     }
 
     @Override

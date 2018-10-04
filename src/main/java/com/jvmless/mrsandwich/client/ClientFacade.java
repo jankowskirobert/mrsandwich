@@ -1,10 +1,13 @@
 package com.jvmless.mrsandwich.client;
 
+import com.jvmless.mrsandwich.client.dto.AddSellerDto;
+import com.jvmless.mrsandwich.client.dto.DisableClientDto;
+import com.jvmless.mrsandwich.client.dto.RegisterClientDto;
+import com.jvmless.mrsandwich.client.exceptions.ClientDisabledException;
+import com.jvmless.mrsandwich.client.exceptions.ClientRegisterException;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor(staticName = "of")
@@ -35,17 +38,11 @@ public class ClientFacade {
         Optional<Client> saved = clientRepository.findById(dto.getClientId());
         saved.ifPresent(x -> {
             if(x.isEnable()){
-
+                x.observerSeller(Seller.of(dto.getSellerId()));
             } else {
-                throw new ClientAlreadyDisabledException();
+                throw new ClientDisabledException();
             }
         });
-    }
-    /*
-    Add seller id to observer list,
-     */
-    public List<ClientSeller> addSeller(AddSellerDto dto){
-        return new ArrayList<>();
     }
 
     /*
