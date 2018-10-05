@@ -12,6 +12,7 @@ class Seller {
     private Area area;
     private List<Location> locations;
     private LocalDateTime personalDataUpdateTime;
+
     public static Seller by(SellerRegisterRequestDto dto) {
         return null;
     }

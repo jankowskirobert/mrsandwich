@@ -45,8 +45,12 @@ public class ClientFacade {
         });
     }
 
-    /*
-    client ma db clienta / seller ma db sellera
-    client ma osobne commandy do dodania
-     */
+    public void removeSellerFromObserverList(@NonNull RemoveSellerDto dto) {
+        Optional<Client> saved = clientRepository.findById(dto.getClientId());
+        saved.ifPresent(x -> {
+            if(x.isEnable()){
+                x.stopObservingSeller(dto.getSelledId());
+            }
+        });
+    }
 }

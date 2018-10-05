@@ -1,5 +1,5 @@
 package com.jvmless.mrsandwich.client;
 
-public enum CorrelationStatus {
+enum CorrelationStatus {
     ACTIVE, DEACTIVATED
 }
