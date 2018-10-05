@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
 
@@ -25,8 +26,7 @@ class Client {
     private ClientStatus status;
     private LocalDateTime terminated;
     private LocalDateTime created;
-    @DBRef
-    private Set<Seller> observerSellers;
+    private Set<Correlation> observerCorrelations;
 
     public String id() {
         return clientId;
@@ -49,11 +49,21 @@ class Client {
         terminated = LocalDateTime.now();
     }
 
-    public void observerSeller(Seller seller){
-        seller.markAsObserved();
-        if(!this.observerSellers.add(seller)){
+    public void observerSeller(Correlation correlation){
+        if(!this.observerCorrelations.add(correlation)){
             throw new SellerAlreadyOnListException();
         }
+    }
+
+    public boolean hasObservedSeller() {
+        return !observerCorrelations.isEmpty();
+    }
+
+    public void stopObservingSeller(String correlationId) {
+        if(observerCorrelations.isEmpty())
+            throw new NoSuchElementException();
+        if(!observerCorrelations.remove(Correlation.of(correlationId)))
+            throw new SellerNotFoundException();
     }
 
     @Override

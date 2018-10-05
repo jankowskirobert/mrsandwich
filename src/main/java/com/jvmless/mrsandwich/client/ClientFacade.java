@@ -38,15 +38,19 @@ public class ClientFacade {
         Optional<Client> saved = clientRepository.findById(dto.getClientId());
         saved.ifPresent(x -> {
             if(x.isEnable()){
-                x.observerSeller(Seller.of(dto.getSellerId()));
+                x.observerSeller(Correlation.of(dto.getSellerId()));
             } else {
                 throw new ClientDisabledException();
             }
         });
     }
 
-    /*
-    client ma db clienta / seller ma db sellera
-    client ma osobne commandy do dodania
-     */
+    public void removeSellerFromObserverList(@NonNull RemoveSellerDto dto) {
+        Optional<Client> saved = clientRepository.findById(dto.getClientId());
+        saved.ifPresent(x -> {
+            if(x.isEnable()){
+                x.stopObservingSeller(dto.getSelledId());
+            }
+        });
+    }
 }
