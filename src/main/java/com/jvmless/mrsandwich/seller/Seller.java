@@ -13,6 +13,10 @@ class Seller {
     private List<Location> locations;
     private LocalDateTime personalDataUpdateTime;
 
+    public String id() {
+        return id;
+    }
+
     public static Seller by(SellerRegisterRequestDto dto) {
         return null;
     }
