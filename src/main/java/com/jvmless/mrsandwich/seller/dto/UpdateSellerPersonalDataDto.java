@@ -1,4 +1,4 @@
-package com.jvmless.mrsandwich.seller;
+package com.jvmless.mrsandwich.seller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,5 +1,6 @@
 package com.jvmless.mrsandwich.seller;
 
+import com.jvmless.mrsandwich.seller.dto.SellerRegisterRequestDto;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;

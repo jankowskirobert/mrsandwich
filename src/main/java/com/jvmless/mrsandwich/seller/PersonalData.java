@@ -1,5 +1,6 @@
 package com.jvmless.mrsandwich.seller;
 
+import com.jvmless.mrsandwich.seller.dto.UpdateSellerPersonalDataDto;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;

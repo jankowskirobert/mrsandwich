@@ -3,11 +3,9 @@ package com.jvmless.mrsandwich.client;
 import com.jvmless.mrsandwich.client.dto.AddSellerDto;
 import com.jvmless.mrsandwich.client.dto.DisableClientDto;
 import com.jvmless.mrsandwich.client.dto.RegisterClientDto;
+import com.jvmless.mrsandwich.client.dto.RemoveSellerDto;
 import com.jvmless.mrsandwich.client.exceptions.ClientDisabledException;
 import com.jvmless.mrsandwich.client.exceptions.ClientRegisterException;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,10 +38,8 @@ public class ClientFacade {
     public void disableClient(@NonNull DisableClientDto dto) {
         Optional<Client> saved = clientRepository.findById(dto.getClientId());
         saved.ifPresent(x -> {
-
             x.disable();
             clientRepository.update(x);
-
         });
     }
 
