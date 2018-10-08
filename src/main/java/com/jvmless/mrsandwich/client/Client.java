@@ -14,9 +14,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-/*
-    add mapping to another model that contains mongodb annotations
- */
 @Document(collection = "client")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)

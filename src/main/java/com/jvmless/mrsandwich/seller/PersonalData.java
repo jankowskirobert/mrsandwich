@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class PersonalData {
+class PersonalData {
     private String firstName;
     private String lastName;
     private LocalDate birthDay;

@@ -1,10 +1,9 @@
 package com.jvmless.mrsandwich.client;
 
-import com.jvmless.mrsandwich.client.ClientRepository;
-import com.jvmless.mrsandwich.client.ClientRepositoryInMemory;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowire;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 @Profile("dev")
 @Configuration

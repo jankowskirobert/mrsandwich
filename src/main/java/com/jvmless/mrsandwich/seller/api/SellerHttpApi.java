@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController()
 @RequestMapping("/seller")
-public class SellerHttpApi {
+class SellerHttpApi {
 
     private final SellerFacade sellerFacade;
 
