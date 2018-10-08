@@ -1,4 +1,4 @@
 package com.jvmless.mrsandwich.seller;
 
-public class Area {
+class Area {
 }

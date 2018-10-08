@@ -3,7 +3,7 @@ package com.jvmless.mrsandwich.seller;
 import java.util.List;
 import java.util.Optional;
 
-public class SellerRepositoryMongoAdapter implements SellerRepository {
+class SellerRepositoryMongoAdapter implements SellerRepository {
 
     private SellerRepositoryMongoDb sellerRepositoryMongoDb;
 
