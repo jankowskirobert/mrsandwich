@@ -2,15 +2,15 @@ package com.jvmless.mrsandwich.client;
 
 import com.jvmless.mrsandwich.client.dto.RegisterClientDto;
 import com.jvmless.mrsandwich.client.exceptions.ClientAlreadyDisabledException;
-import com.jvmless.mrsandwich.client.exceptions.SellerAlreadyOnListException;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,7 +26,7 @@ class Client {
     private ClientStatus status;
     private LocalDateTime terminated;
     private LocalDateTime created;
-    private Set<Correlation> observerCorrelations;
+    private Set<Seller> sellers;
 
     public String id() {
         return clientId;
@@ -37,33 +37,29 @@ class Client {
     }
 
     public boolean isEnable() {
-        if(status.equals(ClientStatus.ENABLE))
+        if (status.equals(ClientStatus.ENABLE))
             return true;
         return false;
     }
 
     public void disable() {
-        if(this.status.equals(ClientStatus.DISABLE))
+        if (this.status.equals(ClientStatus.DISABLE))
             throw new ClientAlreadyDisabledException();
         this.status = ClientStatus.DISABLE;
         terminated = LocalDateTime.now();
     }
 
-    public void observerSeller(Correlation correlation){
-        if(!this.observerCorrelations.add(correlation)){
-            throw new SellerAlreadyOnListException();
+    public void addSeller(String sellerId) {
+        Seller seller = Seller.of(sellerId);
+        if (!sellers.contains(seller)) {
+            seller.active();
+            sellers.add(seller);
         }
     }
 
-    public boolean hasObservedSeller() {
-        return !observerCorrelations.isEmpty();
-    }
-
-    public void stopObservingSeller(String correlationId) {
-        if(observerCorrelations.isEmpty())
-            throw new NoSuchElementException();
-        if(!observerCorrelations.remove(Correlation.of(correlationId)))
-            throw new SellerNotFoundException();
+    public void removeSeller(String sellerId) {
+        Seller seller = Seller.of(sellerId);
+        sellers.stream().filter(x -> x.equals(seller)).forEach(x -> x.deactivate());
     }
 
     @Override

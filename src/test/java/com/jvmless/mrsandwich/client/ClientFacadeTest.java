@@ -50,8 +50,7 @@ public class ClientFacadeTest {
         String clientId = UUID.randomUUID().toString();
         String sellerId = UUID.randomUUID().toString();
         Client client = Client.by(new RegisterClientDto(clientId));
-        Correlation correlation = Correlation.of(sellerId);
-        client.observerSeller(correlation);
+        client.addSeller(sellerId);
     }
 
     @After

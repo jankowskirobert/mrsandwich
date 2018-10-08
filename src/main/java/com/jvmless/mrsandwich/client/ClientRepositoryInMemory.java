@@ -1,13 +1,13 @@
 package com.jvmless.mrsandwich.client;
 
-import com.jvmless.mrsandwich.client.Client;
-import com.jvmless.mrsandwich.client.ClientRepository;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
+@NoArgsConstructor
 class ClientRepositoryInMemory implements ClientRepository {
     private Map<String, Client> inMemoryRepository = new ConcurrentHashMap<>();
 

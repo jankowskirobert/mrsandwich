@@ -1,4 +1,4 @@
-package com.jvmless.mrsandwich.client;
+package com.jvmless.mrsandwich.client.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

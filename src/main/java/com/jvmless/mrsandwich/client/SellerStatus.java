@@ -1,5 +1,5 @@
 package com.jvmless.mrsandwich.client;
 
-enum CorrelationStatus {
+enum SellerStatus {
     ACTIVE, DEACTIVATED
 }

@@ -1,5 +1,6 @@
 package com.jvmless.mrsandwich.seller;
 
+import com.jvmless.mrsandwich.seller.dto.SellerRegisterRequestDto;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
@@ -12,6 +13,10 @@ class Seller {
     private Area area;
     private List<Location> locations;
     private LocalDateTime personalDataUpdateTime;
+
+    public String id() {
+        return id;
+    }
 
     public static Seller by(SellerRegisterRequestDto dto) {
         return null;
