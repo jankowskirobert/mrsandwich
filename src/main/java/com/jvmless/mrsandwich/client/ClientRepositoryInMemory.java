@@ -12,7 +12,7 @@ class ClientRepositoryInMemory implements ClientRepository {
     private Map<String, Client> inMemoryRepository = new ConcurrentHashMap<>();
 
     @Override
-    public Optional<Client> findById(String clientId) {
+    public Optional<Client> findById(ClientId clientId) {
         return Optional.ofNullable(inMemoryRepository.get(clientId));
     }
 

@@ -11,12 +11,16 @@ import java.util.Objects;
 @Document(collection = "seller")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 class Seller {
-    private String sellerId;
+    private SellerId sellerId;
     private SellerStatus sellerStatus;
     private LocalDateTime observationStart;
     private LocalDateTime observationEnd;
 
     public static Seller of(String sellerId) {
+        return new Seller(new SellerId(sellerId), SellerStatus.ACTIVE, LocalDateTime.now(), null);
+    }
+
+    public static Seller of(SellerId sellerId) {
         return new Seller(sellerId, SellerStatus.ACTIVE, LocalDateTime.now(), null);
     }
 

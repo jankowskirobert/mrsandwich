@@ -19,18 +19,18 @@ import java.util.Set;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 class Client {
     @Id
-    private String clientId;
+    private ClientId clientId;
     private ClientStatus status;
     private LocalDateTime terminated;
     private LocalDateTime created;
     private Set<Seller> sellers;
 
     public String id() {
-        return clientId;
+        return clientId.id();
     }
 
     public static Client by(@NonNull RegisterClientDto dto) {
-        return new Client(dto.getClientId(), ClientStatus.ENABLE, null, LocalDateTime.now(), new HashSet<>());
+        return new Client(new ClientId(dto.getClientId()), ClientStatus.ENABLE, null, LocalDateTime.now(), new HashSet<>());
     }
 
     public boolean isEnable() {
@@ -65,6 +65,10 @@ class Client {
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
         return Objects.equals(clientId, client.clientId);
+    }
+
+    public Set<Seller> getSellers() {
+        return sellers;
     }
 
     @Override
