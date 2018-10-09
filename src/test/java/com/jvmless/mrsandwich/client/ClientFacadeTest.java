@@ -36,10 +36,10 @@ public class ClientFacadeTest {
 
     @Test
     public void testDisableClient() {
-        String clientId = UUID.randomUUID().toString();
-        RegisterClientDto clientDto = new RegisterClientDto(clientId);
+        ClientId clientId = ClientId.random();
+        RegisterClientDto clientDto = new RegisterClientDto(clientId.id());
         clientFacade.registerClient(clientDto);
-        DisableClientDto disableClientDto = new DisableClientDto(clientId);
+        DisableClientDto disableClientDto = new DisableClientDto(clientId.id());
         clientFacade.disableClient(disableClientDto);
         Optional<Client> after = clientRepository.findById(clientId);
         Assert.assertThat(after.get().isEnable(), Matchers.is(false));

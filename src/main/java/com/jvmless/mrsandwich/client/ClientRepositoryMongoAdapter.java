@@ -11,7 +11,7 @@ class ClientRepositoryMongoAdapter implements ClientRepository {
     }
 
     @Override
-    public Optional<Client> findById(String clientId) {
+    public Optional<Client> findById(ClientId clientId) {
         return clientRepository.findById(clientId);
     }
 
