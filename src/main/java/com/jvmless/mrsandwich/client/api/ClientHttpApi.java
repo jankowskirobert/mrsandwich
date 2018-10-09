@@ -9,11 +9,9 @@ import com.jvmless.mrsandwich.client.dto.RegisterClientDto;
 import com.jvmless.mrsandwich.seller.SellerFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -53,8 +51,8 @@ class ClientHttpApi {
         clientFacade.disableClient(dto);
     }
 
-    @RequestMapping(path = "/observed", consumes = "application/json", method = RequestMethod.GET)
-    public Iterator<ObservedSellerDto> listOfWatchedSellers(@RequestBody ClientObservedSellersDto dto) {
-        return clientFacade.getObservedSellers(dto).iterator();
+    @RequestMapping(path = "/observed", produces = "application/json", method = RequestMethod.GET)
+    public List<ObservedSellerDto> listOfWatchedSellers(@RequestParam String clientId) {
+        return new ArrayList<>(clientFacade.getObservedSellers(clientId));
     }
 }

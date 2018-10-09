@@ -68,8 +68,8 @@ public class ClientFacade {
         });
     }
 
-    public Set<ObservedSellerDto> getObservedSellers(@NonNull ClientObservedSellersDto dto) {
-        ClientId id = new ClientId(dto.getClientId());
+    public Set<ObservedSellerDto> getObservedSellers(@NonNull String clientId) {
+        ClientId id = new ClientId(clientId);
         Optional<Client> saved = clientRepository.findById(id);
         return saved.map(x -> x.getSellers()).orElse(Collections.emptySet()).stream().map(y -> {
             ModelMapper modelMapper = new ModelMapper();
