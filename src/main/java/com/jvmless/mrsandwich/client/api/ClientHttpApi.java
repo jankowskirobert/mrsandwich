@@ -2,10 +2,7 @@ package com.jvmless.mrsandwich.client.api;
 
 
 import com.jvmless.mrsandwich.client.ClientFacade;
-import com.jvmless.mrsandwich.client.dto.ClientObservedSellersDto;
-import com.jvmless.mrsandwich.client.dto.DisableClientDto;
-import com.jvmless.mrsandwich.client.dto.ObservedSellerDto;
-import com.jvmless.mrsandwich.client.dto.RegisterClientDto;
+import com.jvmless.mrsandwich.client.dto.*;
 import com.jvmless.mrsandwich.seller.SellerFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +26,7 @@ class ClientHttpApi {
         this.sellerFacade = sellerFacade;
     }
 
-    @RequestMapping(path = "/register", consumes = "application/json", method = RequestMethod.POST)
+    @RequestMapping(path = "/register", consumes = "application/json", method =g RequestMethod.POST)
     public void registerClient(@RequestBody RegisterClientDto dto) {
         clientFacade.registerClient(dto);
     }
@@ -42,13 +39,13 @@ class ClientHttpApi {
 
 
     @RequestMapping(path = "/observe", consumes = "application/json", method = RequestMethod.POST)
-    public void observerSeller(@RequestBody DisableClientDto dto) {
-        clientFacade.disableClient(dto);
+    public void observerSeller(@RequestBody AddSellerDto dto) {
+        clientFacade.addSellerToObserverList(dto);
     }
 
     @RequestMapping(path = "/observe", consumes = "application/json", method = RequestMethod.DELETE)
-    public void stopWatchingSeller(@RequestBody DisableClientDto dto) {
-        clientFacade.disableClient(dto);
+    public void stopWatchingSeller(@RequestBody RemoveSellerDto dto) {
+        clientFacade.removeSellerFromObserverList(dto);
     }
 
     @RequestMapping(path = "/observed", produces = "application/json", method = RequestMethod.GET)
