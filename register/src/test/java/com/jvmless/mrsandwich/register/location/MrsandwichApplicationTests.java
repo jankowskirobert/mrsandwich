@@ -1,4 +1,4 @@
-package com.jvmless.mrsandwich;
+package com.jvmless.mrsandwich.register.location;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

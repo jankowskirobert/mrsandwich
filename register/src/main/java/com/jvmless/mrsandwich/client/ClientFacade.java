@@ -3,13 +3,13 @@ package com.jvmless.mrsandwich.client;
 import com.jvmless.mrsandwich.client.dto.*;
 import com.jvmless.mrsandwich.client.exceptions.ClientDisabledException;
 import com.jvmless.mrsandwich.client.exceptions.ClientRegisterException;
+import com.jvmless.mrsandwich.register.client.dto.*;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 
 import javax.validation.Valid;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
