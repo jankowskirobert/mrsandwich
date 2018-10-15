@@ -42,7 +42,7 @@ public class ClientFacadeTest {
         DisableClientDto disableClientDto = new DisableClientDto(clientId.id());
         clientFacade.disableClient(disableClientDto);
         Optional<Client> after = clientRepository.findById(clientId);
-        Assert.assertThat(after.get().isEnable(), Matchers.is(false));
+        Assert.assertThat(after.get().isEnable(), Matchers.equalTo(false));
     }
 
     @Test

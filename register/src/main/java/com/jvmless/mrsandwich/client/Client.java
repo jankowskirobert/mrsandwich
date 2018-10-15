@@ -49,7 +49,6 @@ class Client {
     public void addSeller(String sellerId) {
         Seller seller = Seller.of(sellerId);
         if (!sellers.contains(seller)) {
-            seller.active();
             sellers.add(seller);
         }
     }

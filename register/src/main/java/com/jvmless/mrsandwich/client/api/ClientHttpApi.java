@@ -3,7 +3,6 @@ package com.jvmless.mrsandwich.client.api;
 
 import com.jvmless.mrsandwich.client.ClientFacade;
 import com.jvmless.mrsandwich.client.dto.*;
-import com.jvmless.mrsandwich.register.client.dto.*;
 import com.jvmless.mrsandwich.seller.SellerFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

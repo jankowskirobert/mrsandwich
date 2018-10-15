@@ -24,15 +24,6 @@ class Seller {
         return new Seller(sellerId, SellerStatus.ACTIVE, LocalDateTime.now(), null);
     }
 
-    public void active() {
-        if(this.observationStart != null) {
-            throw new SellerDeactivateException("Seller already started");
-        }
-        this.observationEnd = null;
-        this.sellerStatus = SellerStatus.ACTIVE;
-        this.observationStart = LocalDateTime.now();
-    }
-
     public void deactivate() {
         if(this.observationStart == null) {
             throw new SellerDeactivateException("Seller never started");
