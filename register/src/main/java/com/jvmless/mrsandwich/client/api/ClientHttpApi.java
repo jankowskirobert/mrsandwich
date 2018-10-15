@@ -26,7 +26,7 @@ class ClientHttpApi {
         this.sellerFacade = sellerFacade;
     }
 
-    @RequestMapping(path = "/register", consumes = "application/json", method =g RequestMethod.POST)
+    @RequestMapping(path = "/register", consumes = "application/json", method = RequestMethod.POST)
     public void registerClient(@RequestBody RegisterClientDto dto) {
         clientFacade.registerClient(dto);
     }
