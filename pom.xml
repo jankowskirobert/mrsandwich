@@ -2,13 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.jvmless</groupId>
-    <artifactId>mrsandwich</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <groupId>com.jvmless.mrsandwich</groupId>
+    <artifactId>mrsandwich-components</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <name>mrsandwich-components</name>
 
-    <name>mrsandwich</name>
     <description>Demo project for Spring Boot</description>
 
 
@@ -20,10 +19,13 @@
         <java.version>1.8</java.version>
     </properties>
     <modules>
-        <module>register</module>
+
+        <module>register-client</module>
+        <module>register-seller</module>
         <module>location</module>
         <module>gateway</module>
     </modules>
+
 
 
 
