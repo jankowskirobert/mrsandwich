@@ -22,16 +22,16 @@ public class ClientFacadeTest {
     @Before
     public void setUp() {
         clientFacade = ClientFacade.of(clientRepository);
-        String clientId = "ALREADY IN DB";
-        RegisterClientDto clientDto = new RegisterClientDto(clientId);
-        clientFacade.registerClient(clientDto);
     }
 
     @Test(expected = ClientRegisterException.class)
-    public void testRegisterClient() {
+    public void shouldThrowExceptionIfClientWithGivenIdAlreadyExist() {
+        clientFacade = ClientFacade.of(clientRepository);
         String clientId = "ALREADY IN DB";
-        RegisterClientDto clientDto = new RegisterClientDto(clientId);
-        clientFacade.registerClient(clientDto);
+        RegisterClientDto initialClientDto = new RegisterClientDto(clientId);
+        clientFacade.registerClient(initialClientDto);
+        RegisterClientDto secondaryClientDto = new RegisterClientDto(clientId);
+        clientFacade.registerClient(secondaryClientDto);
     }
 
     @Test

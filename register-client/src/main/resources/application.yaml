@@ -2,9 +2,9 @@ spring:
   profiles:
     active: dev
   application:
-    name: register
+    name: register-client
 server:
-  port: 0
+  port: 9001
 eureka:
   client:
     serviceUrl:

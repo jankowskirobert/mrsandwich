@@ -3,7 +3,6 @@ package com.jvmless.mrsandwich.client.api;
 
 import com.jvmless.mrsandwich.client.ClientFacade;
 import com.jvmless.mrsandwich.client.dto.*;
-import com.jvmless.mrsandwich.seller.SellerFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +16,11 @@ import java.util.List;
 class ClientHttpApi {
 
     private final ClientFacade clientFacade;
-    private final SellerFacade sellerFacade;
+
 
     @Autowired
-    public ClientHttpApi(ClientFacade clientFacade, SellerFacade sellerFacade) {
+    public ClientHttpApi(ClientFacade clientFacade) {
         this.clientFacade = clientFacade;
-        this.sellerFacade = sellerFacade;
     }
 
     @RequestMapping(path = "/register", consumes = "application/json", method = RequestMethod.POST)
