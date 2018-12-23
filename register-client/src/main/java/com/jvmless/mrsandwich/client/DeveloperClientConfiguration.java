@@ -1,5 +1,7 @@
 package com.jvmless.mrsandwich.client;
 
+import com.jvmless.mrsandwich.client.api.MQSender;
+import com.jvmless.mrsandwich.client.api.MQSenderDummy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +19,14 @@ class DeveloperClientConfiguration {
     }
 
     @Bean
-    public ClientFacade clientDevFacade(ClientRepository clientRepository) {
+    public ClientFacade clientDevFacade(ClientRepository clientRepository, MQSender mqSender) {
         log.info("[DEVELOPER MODE] Client facade");
-        return new ClientFacade(clientRepository);
+        return new ClientFacade(clientRepository, mqSender);
+    }
+
+    @Bean
+    public MQSender dummyMqSender() {
+        log.info("[DEVELOPER MODE] Client dummy MQ sender");
+        return new MQSenderDummy();
     }
 }

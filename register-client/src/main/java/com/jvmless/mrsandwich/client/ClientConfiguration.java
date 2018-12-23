@@ -1,6 +1,9 @@
 package com.jvmless.mrsandwich.client;
 
+import com.jvmless.mrsandwich.client.api.MQSender;
+import com.jvmless.mrsandwich.client.api.RabbitSender;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -19,8 +22,14 @@ class ClientConfiguration {
     }
 
     @Bean
-    public ClientFacade clientStageFacade(ClientRepository clientRepository) {
+    public ClientFacade clientStageFacade(ClientRepository clientRepository, MQSender mqSender) {
         log.info("[STAGE MODE] Client facade");
-        return ClientFacade.of(clientRepository);
+        return ClientFacade.of(clientRepository, mqSender);
+    }
+
+    @Bean
+    public MQSender mqSender(RabbitTemplate rabbitTemplate) {
+        log.info("[STAGE MODE] Client RabbitMQ sender");
+        return new RabbitSender(rabbitTemplate);
     }
 }

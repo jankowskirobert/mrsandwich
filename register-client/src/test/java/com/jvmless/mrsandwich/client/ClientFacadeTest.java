@@ -1,6 +1,8 @@
 package com.jvmless.mrsandwich.client;
 
 
+import com.jvmless.mrsandwich.client.api.MQSender;
+import com.jvmless.mrsandwich.client.api.MQSenderDummy;
 import com.jvmless.mrsandwich.client.dto.DisableClientDto;
 import com.jvmless.mrsandwich.client.dto.RegisterClientDto;
 import com.jvmless.mrsandwich.client.exceptions.ClientRegisterException;
@@ -16,17 +18,16 @@ import java.util.UUID;
 public class ClientFacadeTest {
 
     ClientRepository clientRepository = new ClientRepositoryInMemory();
-
+    MQSender mqSender = new MQSenderDummy();
     ClientFacade clientFacade;
 
     @Before
     public void setUp() {
-        clientFacade = ClientFacade.of(clientRepository);
+        clientFacade = ClientFacade.of(clientRepository, mqSender);
     }
 
     @Test(expected = ClientRegisterException.class)
     public void shouldThrowExceptionIfClientWithGivenIdAlreadyExist() {
-        clientFacade = ClientFacade.of(clientRepository);
         String clientId = "ALREADY IN DB";
         RegisterClientDto initialClientDto = new RegisterClientDto(clientId);
         clientFacade.registerClient(initialClientDto);

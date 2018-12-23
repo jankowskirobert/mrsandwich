@@ -1,5 +1,6 @@
 package com.jvmless.mrsandwich.client;
 
+import com.jvmless.mrsandwich.client.api.MQSender;
 import com.jvmless.mrsandwich.client.dto.*;
 import com.jvmless.mrsandwich.client.exceptions.ClientDisabledException;
 import com.jvmless.mrsandwich.client.exceptions.ClientRegisterException;
@@ -17,13 +18,15 @@ import java.util.stream.Collectors;
 public class ClientFacade {
 
     private ClientRepository clientRepository;
+    private MQSender mqSender;
 
-    public static ClientFacade of(ClientRepository clientRepository) {
-        return new ClientFacade(clientRepository);
+    public static ClientFacade of(ClientRepository clientRepository, MQSender mqSender) {
+        return new ClientFacade(clientRepository, mqSender);
     }
 
-    public ClientFacade(ClientRepository clientRepository) {
+    public ClientFacade(ClientRepository clientRepository, MQSender mqSender) {
         this.clientRepository = clientRepository;
+        this.mqSender = mqSender;
     }
 
     public void registerClient(@Valid @NonNull RegisterClientDto dto) {
@@ -31,6 +34,7 @@ public class ClientFacade {
         try {
             log.info("New Client: {}", dto.toString());
             Client c = clientRepository.save(client);
+            mqSender.registerClientMessage(dto);
         } catch (Exception ex) {
             throw new ClientRegisterException(ex);
         }

@@ -68,11 +68,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
             <scope>test</scope>
@@ -129,6 +124,12 @@
             <properties>
                 <spring.profiles.active>dev</spring.profiles.active>
             </properties>
+        </profile>
+        <profile>
+            <id>stage</id>
+            <properties>
+                <spring.profiles.active>stage</spring.profiles.active>
+            </properties>
             <dependencies>
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
@@ -136,13 +137,6 @@
                     <scope>provided</scope>
                 </dependency>
             </dependencies>
-        </profile>
-        <profile>
-            <id>stage</id>
-            <properties>
-                <spring.profiles.active>stage</spring.profiles.active>
-            </properties>
-
         </profile>
     </profiles>
 
