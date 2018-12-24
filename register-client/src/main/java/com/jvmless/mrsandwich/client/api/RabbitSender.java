@@ -13,6 +13,6 @@ public class RabbitSender implements MQSender {
 
     @Override
     public void registerClientMessage(RegisterClientDto dto) {
-        template.convertAndSend("sa","dd","qwerty");
+        template.convertAndSend("register-client", "new-client-register", dto.getClientId());
     }
 }
