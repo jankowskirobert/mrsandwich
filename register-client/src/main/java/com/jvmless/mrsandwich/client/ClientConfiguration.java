@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-@Profile("stage")
+@Profile({"stage", "prod"})
 @Configuration
 @EnableMongoRepositories
 @Slf4j
@@ -31,4 +31,10 @@ class ClientConfiguration {
         log.info("[STAGE MODE] Client RabbitMQ sender");
         return new RabbitSender(rabbitTemplate);
     }
+
+    @Bean
+    public BackstageClientFacade backstageClientFacade() {
+        return new BackstageClientFacade();
+    }
+
 }

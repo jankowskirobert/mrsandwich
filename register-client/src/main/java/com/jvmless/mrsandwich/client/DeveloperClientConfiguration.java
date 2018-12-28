@@ -27,4 +27,9 @@ class DeveloperClientConfiguration {
         log.info("[DEVELOPER MODE] Client dummy MQ sender");
         return new MQSenderDummy();
     }
+
+    @Bean
+    public BackstageClientFacade backstageClientFacade() {
+        return new BackstageClientFacade();
+    }
 }
