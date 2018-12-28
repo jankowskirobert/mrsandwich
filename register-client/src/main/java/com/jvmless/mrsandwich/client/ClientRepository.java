@@ -9,6 +9,6 @@ public interface ClientRepository {
     Optional<Client> findById(ClientId clientId);
     Client save(Client x);
     Client update(Client x);
-
+    ClientStats fullStats();
     void removeAll();
 }
