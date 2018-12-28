@@ -33,6 +33,13 @@ class ClientRepositoryInMemory implements ClientRepository {
     }
 
     @Override
+    public ClientStats fullStats() {
+        int count = inMemoryRepository.size();
+        long active = inMemoryRepository.values().stream().filter(x -> x.isEnable()).count();
+        return new ClientStats();
+    }
+
+    @Override
     public void removeAll() {
         inMemoryRepository.clear();
     }

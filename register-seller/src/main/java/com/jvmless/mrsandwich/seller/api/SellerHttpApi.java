@@ -22,4 +22,9 @@ class SellerHttpApi {
     public List<SellerDto> getAvailableSellers() {
         return sellerFacade.getAvailableSellers();
     }
+
+    @RequestMapping(path = "", produces = "application/json", method = RequestMethod.GET)
+    public List<SellerDto> getAvailableSellers() {
+        return sellerFacade.getAvailableSellers();
+    }
 }

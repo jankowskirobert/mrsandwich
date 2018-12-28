@@ -33,8 +33,8 @@ class ClientConfiguration {
     }
 
     @Bean
-    public BackstageClientFacade backstageClientFacade() {
-        return new BackstageClientFacade();
+    public BackstageClientFacade backstageClientFacade(ClientRepository clientRepository) {
+        return new BackstageClientFacade(clientRepository);
     }
 
 }

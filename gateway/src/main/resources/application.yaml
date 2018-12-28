@@ -8,3 +8,14 @@ eureka:
     fetchRegistry: false
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: register-seller
+          uri: lb://register-seller
+          predicates:
+            - Path=/seller/**

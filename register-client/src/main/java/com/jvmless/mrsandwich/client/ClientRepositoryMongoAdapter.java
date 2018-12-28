@@ -33,6 +33,11 @@ class ClientRepositoryMongoAdapter implements ClientRepository {
     }
 
     @Override
+    public ClientStats fullStats() {
+        return new ClientStats();
+    }
+
+    @Override
     public void removeAll() {
         clientRepository.deleteAll();
     }

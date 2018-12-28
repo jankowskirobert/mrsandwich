@@ -11,6 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -23,6 +24,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableDiscoveryClient
 @EnableSwagger2
 @EnableEurekaClient
+@EnableFeignClients
 @SpringBootApplication(scanBasePackages = {"com.jvmless.mrsandwich.client"})
 public class RegisterApp {
 
@@ -39,10 +41,5 @@ public class RegisterApp {
 				.build()
 				.apiInfo(new ApiInfoBuilder().version("1.0").title("Mobile Client API").description("Documentation Employee API v1.0").build());
 	}
-
-	static final String topicExchangeName = "spring-boot-exchange";
-
-	static final String queueName = "spring-boot";
-
 
 }
