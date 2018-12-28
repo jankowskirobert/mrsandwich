@@ -1,7 +1,6 @@
 package com.jvmless.mrsandwich.client;
 
-import com.jvmless.mrsandwich.client.api.MQSender;
-import com.jvmless.mrsandwich.client.api.RabbitSender;
+import com.jvmless.mrsandwich.client.RabbitSender;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Bean;

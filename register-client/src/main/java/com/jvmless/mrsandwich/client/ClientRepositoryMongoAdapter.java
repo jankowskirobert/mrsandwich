@@ -1,5 +1,8 @@
 package com.jvmless.mrsandwich.client;
 
+import com.jvmless.mrsandwich.client.exceptions.ClientRegisterDuplicateKeyException;
+import org.springframework.dao.DuplicateKeyException;
+
 import java.util.Optional;
 
 class ClientRepositoryMongoAdapter implements ClientRepository {
@@ -17,7 +20,11 @@ class ClientRepositoryMongoAdapter implements ClientRepository {
 
     @Override
     public Client save(Client x) {
-        return clientRepository.insert(x);
+        try {
+            return clientRepository.insert(x);
+        } catch (DuplicateKeyException exception) {
+            throw new ClientRegisterDuplicateKeyException(String.format("Client %s already in database!", x.id()), exception);
+        }
     }
 
     @Override

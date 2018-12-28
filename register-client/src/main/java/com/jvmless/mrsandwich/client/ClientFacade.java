@@ -1,6 +1,5 @@
 package com.jvmless.mrsandwich.client;
 
-import com.jvmless.mrsandwich.client.api.MQSender;
 import com.jvmless.mrsandwich.client.dto.*;
 import com.jvmless.mrsandwich.client.exceptions.ClientDisabledException;
 import com.jvmless.mrsandwich.client.exceptions.ClientRegisterException;

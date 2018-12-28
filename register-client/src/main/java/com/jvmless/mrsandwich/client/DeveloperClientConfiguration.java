@@ -1,7 +1,5 @@
 package com.jvmless.mrsandwich.client;
 
-import com.jvmless.mrsandwich.client.api.MQSender;
-import com.jvmless.mrsandwich.client.api.MQSenderDummy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,10 +1,10 @@
-package com.jvmless.mrsandwich.client.api;
+package com.jvmless.mrsandwich.client;
 
 import com.jvmless.mrsandwich.client.dto.RegisterClientDto;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class MQSenderDummy implements MQSender {
+class MQSenderDummy implements MQSender {
 
     @Override
     public void registerClientMessage(RegisterClientDto dto) {

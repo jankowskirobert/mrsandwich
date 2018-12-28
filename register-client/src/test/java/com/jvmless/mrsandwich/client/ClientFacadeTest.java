@@ -1,8 +1,6 @@
 package com.jvmless.mrsandwich.client;
 
 
-import com.jvmless.mrsandwich.client.api.MQSender;
-import com.jvmless.mrsandwich.client.api.MQSenderDummy;
 import com.jvmless.mrsandwich.client.dto.DisableClientDto;
 import com.jvmless.mrsandwich.client.dto.RegisterClientDto;
 import com.jvmless.mrsandwich.client.exceptions.ClientRegisterException;

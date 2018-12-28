@@ -1,4 +1,4 @@
-package com.jvmless.mrsandwich.client.api;
+package com.jvmless.mrsandwich.client.api.http;
 
 
 import com.jvmless.mrsandwich.client.ClientFacade;
