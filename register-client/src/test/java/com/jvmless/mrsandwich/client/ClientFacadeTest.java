@@ -16,12 +16,12 @@ import java.util.UUID;
 public class ClientFacadeTest {
 
     ClientRepository clientRepository = new ClientRepositoryInMemory();
-    MQSender mqSender = new MQSenderDummy();
+    MQSenderAdapter mqSenderAdapter = new MQSenderAdapterDummy();
     ClientFacade clientFacade;
 
     @Before
     public void setUp() {
-        clientFacade = ClientFacade.of(clientRepository, mqSender);
+        clientFacade = ClientFacade.of(clientRepository, mqSenderAdapter);
     }
 
     @Test(expected = ClientRegisterException.class)

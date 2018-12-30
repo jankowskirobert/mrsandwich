@@ -1,6 +1,6 @@
 package com.jvmless.mrsandwich.seller;
 
-import com.jvmless.mrsandwich.seller.dto.SellerRegisterRequestDto;
+import com.jvmless.mrsandwich.seller.dto.SellerRegisterDto;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
@@ -18,7 +18,7 @@ class Seller {
         return id;
     }
 
-    public static Seller by(SellerRegisterRequestDto dto) {
+    public static Seller by(SellerRegisterDto dto) {
         return null;
     }
 

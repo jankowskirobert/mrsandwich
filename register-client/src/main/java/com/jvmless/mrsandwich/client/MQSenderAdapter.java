@@ -3,6 +3,6 @@ package com.jvmless.mrsandwich.client;
 import com.jvmless.mrsandwich.client.dto.RegisterClientDto;
 import com.jvmless.mrsandwich.client.exceptions.MQException;
 
-interface MQSender {
+public interface MQSenderAdapter {
     void registerClientMessage(RegisterClientDto dto) throws MQException;
 }

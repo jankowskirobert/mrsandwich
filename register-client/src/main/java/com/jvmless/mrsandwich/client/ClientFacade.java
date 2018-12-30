@@ -17,15 +17,15 @@ import java.util.stream.Collectors;
 public class ClientFacade {
 
     private ClientRepository clientRepository;
-    private MQSender mqSender;
+    private MQSenderAdapter mqSenderAdapter;
 
-    public static ClientFacade of(ClientRepository clientRepository, MQSender mqSender) {
-        return new ClientFacade(clientRepository, mqSender);
+    public static ClientFacade of(ClientRepository clientRepository, MQSenderAdapter mqSenderAdapter) {
+        return new ClientFacade(clientRepository, mqSenderAdapter);
     }
 
-    public ClientFacade(ClientRepository clientRepository, MQSender mqSender) {
+    public ClientFacade(ClientRepository clientRepository, MQSenderAdapter mqSenderAdapter) {
         this.clientRepository = clientRepository;
-        this.mqSender = mqSender;
+        this.mqSenderAdapter = mqSenderAdapter;
     }
 
     public void registerClient(@Valid @NonNull RegisterClientDto dto) {
@@ -33,7 +33,7 @@ public class ClientFacade {
         try {
             log.info("New Client: {}", dto.toString());
             Client c = clientRepository.save(client);
-            mqSender.registerClientMessage(dto);
+            mqSenderAdapter.registerClientMessage(dto);
         } catch (Exception ex) {
             throw new ClientRegisterException(ex);
         }
@@ -79,4 +79,7 @@ public class ClientFacade {
         }).collect(Collectors.toSet());
     }
 
+    public void newSellerRegister(NewSeller newSeller) {
+        log.info("NEW SELLER");
+    }
 }

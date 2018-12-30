@@ -2,7 +2,7 @@ package com.jvmless.mrsandwich.seller;
 
 
 import com.jvmless.mrsandwich.seller.dto.SellerDto;
-import com.jvmless.mrsandwich.seller.dto.SellerRegisterRequestDto;
+import com.jvmless.mrsandwich.seller.dto.SellerRegisterDto;
 import com.jvmless.mrsandwich.seller.dto.UpdateSellerPersonalDataDto;
 import com.jvmless.mrsandwich.seller.exceptions.SellerNotFoundException;
 import lombok.AccessLevel;
@@ -22,7 +22,7 @@ public class SellerFacade {
     private final ModelMapper mapper = new ModelMapper();
     private SellerRepository sellerRepository;
 
-    protected void registerSeller(SellerRegisterRequestDto dto) {
+    protected void registerSeller(SellerRegisterDto dto) {
         Seller seller = sellerRepository.save(Seller.by(dto));
     }
 

@@ -5,11 +5,11 @@ import com.jvmless.mrsandwich.client.exceptions.MQException;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
-class RabbitSender implements MQSender {
+class RabbitSenderAdapter implements MQSenderAdapter {
 
     private final RabbitTemplate template;
 
-    public RabbitSender(RabbitTemplate template) {
+    public RabbitSenderAdapter(RabbitTemplate template) {
         this.template = template;
     }
 

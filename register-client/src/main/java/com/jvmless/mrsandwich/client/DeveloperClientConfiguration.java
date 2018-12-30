@@ -17,15 +17,15 @@ class DeveloperClientConfiguration {
     }
 
     @Bean
-    public ClientFacade clientDevFacade(ClientRepository clientRepository, MQSender mqSender) {
+    public ClientFacade clientDevFacade(ClientRepository clientRepository, MQSenderAdapter mqSenderAdapter) {
         log.info("[DEVELOPER MODE] Client facade");
-        return new ClientFacade(clientRepository, mqSender);
+        return new ClientFacade(clientRepository, mqSenderAdapter);
     }
 
     @Bean
-    public MQSender dummyMqSender() {
+    public MQSenderAdapter dummyMqSender() {
         log.info("[DEVELOPER MODE] Client dummy MQ sender");
-        return new MQSenderDummy();
+        return new MQSenderAdapterDummy();
     }
 
     @Bean

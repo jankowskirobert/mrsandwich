@@ -4,7 +4,7 @@ import com.jvmless.mrsandwich.client.dto.RegisterClientDto;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-class MQSenderDummy implements MQSender {
+class MQSenderAdapterDummy implements MQSenderAdapter {
 
     @Override
     public void registerClientMessage(RegisterClientDto dto) {

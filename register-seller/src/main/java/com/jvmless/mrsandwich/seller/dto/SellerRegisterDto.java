@@ -1,8 +1,11 @@
 package com.jvmless.mrsandwich.seller.dto;
 
+import lombok.Data;
+
 import java.util.List;
 
-public class SellerRegisterRequestDto {
+@Data
+public class SellerRegisterDto {
     private String id;
     private String firstName;
     private String lastName;
