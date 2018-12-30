@@ -32,4 +32,9 @@ class DeveloperClientConfiguration {
     public BackstageClientFacade backstageClientFacade(ClientRepository clientRepository) {
         return new BackstageClientFacade(clientRepository);
     }
+
+    @Bean
+    public MQReceiverPort mqReceiverPort(ClientFacade clientFacade) {
+        return new MQReceiverPortDummy(clientFacade);
+    }
 }

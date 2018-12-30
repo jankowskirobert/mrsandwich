@@ -36,4 +36,9 @@ class ClientConfiguration {
         return new BackstageClientFacade(clientRepository);
     }
 
+    @Bean
+    public MQReceiverPort mqReceiverPort(ClientFacade clientFacade) {
+        return new RabbitReceiverPort(clientFacade);
+    }
+
 }
