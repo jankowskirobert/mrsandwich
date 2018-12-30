@@ -4,9 +4,11 @@ package com.jvmless.mrsandwich.seller;
 import com.jvmless.mrsandwich.seller.dto.SellerDto;
 import com.jvmless.mrsandwich.seller.dto.SellerRegisterRequestDto;
 import com.jvmless.mrsandwich.seller.dto.UpdateSellerPersonalDataDto;
+import com.jvmless.mrsandwich.seller.exceptions.SellerNotFoundException;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import org.modelmapper.ModelMapper;
 
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SellerFacade {
+
     private final ModelMapper mapper = new ModelMapper();
     private SellerRepository sellerRepository;
 
@@ -31,5 +34,13 @@ public class SellerFacade {
 
     public List<SellerDto> getAvailableSellers() {
         return sellerRepository.findAllAvailableSellers().stream().map(x -> mapper.map(x, SellerDto.class)).collect(Collectors.toList());
+    }
+
+    public SellerDto getSeller(@NonNull String sellerId) {
+        return mapper.map(
+                sellerRepository.find(sellerId).orElseThrow(
+                        () -> new SellerNotFoundException(String.format("Cannot find seller with id: %s", sellerId))
+                ), SellerDto.class);
+
     }
 }
