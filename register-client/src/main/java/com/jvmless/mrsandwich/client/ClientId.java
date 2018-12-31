@@ -11,7 +11,7 @@ import java.util.UUID;
 @EqualsAndHashCode
 @Getter
 @Accessors(fluent = true)
-public class ClientId {
+class ClientId {
     private String id;
 
     public static ClientId random() {

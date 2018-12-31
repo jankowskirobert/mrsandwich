@@ -1,14 +1,18 @@
 package com.jvmless.mrsandwich.client;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+
+import javax.management.*;
 
 @Profile("dev")
 @Configuration
 @Slf4j
 class DeveloperClientConfiguration {
+
 
     @Bean
     public ClientRepository clientRepository() {
@@ -34,7 +38,11 @@ class DeveloperClientConfiguration {
     }
 
     @Bean
-    public MQReceiverPort mqReceiverPort(ClientFacade clientFacade) {
-        return new MQReceiverPortDummy(clientFacade);
+    public MQReceiverPort mqReceiverPort(ClientFacade clientFacade, MBeanServer mBeanServer) throws MalformedObjectNameException, NotCompliantMBeanException, InstanceAlreadyExistsException, MBeanRegistrationException {
+        MQReceiverPortDummy mqReceiverPortDummy = new MQReceiverPortDummy(clientFacade);
+        StandardMBean mbean = new StandardMBean(mqReceiverPortDummy, MQReceiverPort.class);
+        ObjectName name = new ObjectName("MQReceiverDummy:type=JMX,name=MQReceiverDummyPort");
+        mBeanServer.registerMBean(mbean, name);
+        return mqReceiverPortDummy;
     }
 }
