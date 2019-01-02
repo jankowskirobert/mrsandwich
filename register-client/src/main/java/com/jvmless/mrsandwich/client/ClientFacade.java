@@ -45,6 +45,7 @@ public class ClientFacade {
         saved.ifPresent(x -> {
             x.disable();
             clientRepository.update(x);
+            mqSenderAdapter.disableClientMessage(dto);
         });
     }
 

@@ -1,6 +1,7 @@
 package com.jvmless.mrsandwich.client;
 
 import com.jvmless.mrsandwich.client.dto.AddSellerDto;
+import com.jvmless.mrsandwich.client.dto.DisableClientDto;
 import com.jvmless.mrsandwich.client.dto.RegisterClientDto;
 import com.jvmless.mrsandwich.client.exceptions.MQException;
 import org.springframework.amqp.AmqpException;
@@ -25,6 +26,11 @@ class RabbitSenderAdapter implements MQSenderAdapter {
 
     @Override
     public void clientObserveSellerMessage(AddSellerDto dto) throws MQException {
+
+    }
+
+    @Override
+    public void disableClientMessage(DisableClientDto dto) {
 
     }
 }
