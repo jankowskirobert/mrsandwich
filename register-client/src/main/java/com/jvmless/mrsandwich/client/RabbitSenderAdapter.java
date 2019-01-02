@@ -1,5 +1,6 @@
 package com.jvmless.mrsandwich.client;
 
+import com.jvmless.mrsandwich.client.dto.AddSellerDto;
 import com.jvmless.mrsandwich.client.dto.RegisterClientDto;
 import com.jvmless.mrsandwich.client.exceptions.MQException;
 import org.springframework.amqp.AmqpException;
@@ -20,5 +21,10 @@ class RabbitSenderAdapter implements MQSenderAdapter {
         } catch (AmqpException exception) {
             throw new MQException("Cannot send client registration event", exception);
         }
+    }
+
+    @Override
+    public void clientObserveSellerMessage(AddSellerDto dto) throws MQException {
+
     }
 }

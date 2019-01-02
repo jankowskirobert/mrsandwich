@@ -54,6 +54,7 @@ public class ClientFacade {
         saved.ifPresent(x -> {
             if (x.isEnable()) {
                 x.addSeller(dto.getSellerId());
+                mqSenderAdapter.clientObserveSellerMessage(dto);
             } else {
                 throw new ClientDisabledException();
             }
@@ -82,4 +83,6 @@ public class ClientFacade {
     public void newSellerRegister(NewSeller newSeller) {
         log.info("NEW SELLER");
     }
+
+
 }
