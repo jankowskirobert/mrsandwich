@@ -7,14 +7,15 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Client {
 
+    private String id;
     private ClientLocation clientLocation;
 
     public static Client from(IncomingClient incomingClient) {
-        return null;
+        return new Client(incomingClient.getId(), ClientLocation.empty());
     }
 
     public void changeCurrentLocation(CurrentClientLocation currentClientLocation) {
-        if(isIncorrectLocation(currentClientLocation)){
+        if (isIncorrectLocation(currentClientLocation)) {
             throw new ClientLocationChangeException();
         }
         clientLocation = ClientLocation.as(currentClientLocation);
@@ -22,6 +23,10 @@ public class Client {
     }
 
     private boolean isIncorrectLocation(CurrentClientLocation currentClientLocation) {
-        return false;
+        return ClientLocation.as(currentClientLocation).isEmpty() && ClientLocation.as(currentClientLocation).isCorrect();
+    }
+
+    public boolean isAbleToLocate() {
+        return !clientLocation.isEmpty();
     }
 }
