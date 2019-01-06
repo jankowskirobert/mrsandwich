@@ -24,6 +24,7 @@
         <module>register-seller</module>
         <module>location</module>
         <module>gateway</module>
+        <module>message</module>
     </modules>
 
 

@@ -6,6 +6,10 @@ public class LocationFacade {
 
     private ClientLocationRepository clientLocationRepository;
 
+    public LocationFacade(ClientLocationRepository clientLocationRepository) {
+        this.clientLocationRepository = clientLocationRepository;
+    }
+
     public void modifyClientLocation(CurrentClientLocation currentClientLocation) {
         clientLocationRepository.findOne(currentClientLocation.id()).ifPresent(
                 x -> {

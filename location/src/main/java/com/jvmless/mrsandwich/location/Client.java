@@ -3,7 +3,9 @@ package com.jvmless.mrsandwich.location;
 import com.jvmless.mrsandwich.location.dto.CurrentClientLocation;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Client {
 
