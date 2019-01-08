@@ -10,4 +10,7 @@ public class Client {
     private String fcmRegistrationId;
     private Location location;
 
+    public static Client map(ClientDto clientDto) {
+        return null;
+    }
 }
