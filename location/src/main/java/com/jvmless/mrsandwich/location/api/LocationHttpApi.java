@@ -15,8 +15,8 @@ class LocationHttpApi {
     @Autowired
     private LocationFacade locationFacade;
 
-    @RequestMapping(path = "/modify", method = RequestMethod.POST)
+    @RequestMapping(path = "/update", method = RequestMethod.POST)
     public void modifyClientLocation(@RequestBody CurrentClientLocation currentClientLocation) {
-        locationFacade.modifyClientLocation(currentClientLocation);
+        locationFacade.updateClientLocation(currentClientLocation);
     }
 }

@@ -5,8 +5,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Optional;
-
 public class TestLocationFacade {
 
     private LocationFacade locationFacade;
@@ -24,6 +22,7 @@ public class TestLocationFacade {
         Client client = Client.from(incomingClient);
         Assert.assertFalse(client.isAbleToLocate());
     }
+
     @Test
     public void shouldChangeClientLocation_customClientLocation(){
         IncomingClient incomingClient = new IncomingClient("TEST1", "New client registered");
@@ -32,7 +31,7 @@ public class TestLocationFacade {
         currentClientLocation.id("TEST1");
         currentClientLocation.custom(true);
         currentClientLocation.address(new Address());
-        locationFacade.modifyClientLocation(currentClientLocation);
+        locationFacade.updateClientLocation(currentClientLocation);
     }
 
 }
