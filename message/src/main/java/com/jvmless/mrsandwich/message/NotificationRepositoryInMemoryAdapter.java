@@ -1,7 +1,6 @@
 package com.jvmless.mrsandwich.message;
 
 import com.jvmless.mrsandwich.NotificationId;
-import com.jvmless.mrsandwich.message.client.Client;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

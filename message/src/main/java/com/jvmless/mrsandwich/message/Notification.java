@@ -1,7 +1,7 @@
 package com.jvmless.mrsandwich.message;
 
 import com.jvmless.mrsandwich.NotificationId;
-import com.jvmless.mrsandwich.message.client.ClientId;
+import com.jvmless.mrsandwich.message.client.Client;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -9,5 +9,8 @@ import lombok.Data;
 @Data
 public class Notification {
     private NotificationId notificationId;
-    private ClientId clientId;
+    private Client clientId;
+    private TargetArea targetId;
+    private Seller seller;
+    private MessageId message;
 }
