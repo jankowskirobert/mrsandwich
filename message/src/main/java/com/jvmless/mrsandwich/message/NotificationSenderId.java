@@ -1,8 +1,12 @@
 package com.jvmless.mrsandwich.message;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 @AllArgsConstructor(staticName = "of")
-public class SellerId {
+@EqualsAndHashCode
+@Getter
+public class NotificationSenderId {
     private String id;
 }

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class Message {
     private MessageId messageId;
     private String messageBody;
-    private SellerId owner;
+    private NotificationSenderId owner;
     private LocalDateTime added;
     private MessageStatus messageStatus;
 }

@@ -15,7 +15,7 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: register-seller
-          uri: lb://register-seller
+        - id: register-notificationSender
+          uri: lb://register-notificationSender
           predicates:
-            - Path=/seller/**
+            - Path=/notificationSender/**

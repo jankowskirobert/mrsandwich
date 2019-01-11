@@ -14,13 +14,14 @@ public class NotifyClientsHandler {
     }
 
     public void handle(@NonNull NotifyClients notifyClients) {
-        Notification notification = notificationRepository.findBy(notifyClients.getNotificationId());
-        if(notification != null) {
+        Notification old = notificationRepository.findBy(notifyClients.getNotificationId());
+        if(old != null) {
             throw new NotificationAlreadyExistException("Id already in database");
         }
         Message message = messageRepository.findBy(notifyClients.getMessageId());
         if(message == null) {
             throw new MessageNotFoundException("Cannot find message with id: "+notifyClients.getMessageId());
         }
+//        Notification notification = Notification.of();
     }
 }

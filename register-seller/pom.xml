@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.jvmless.mrsandwich</groupId>
-  <artifactId>register-seller</artifactId>
+  <artifactId>register-notificationSender</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>register-seller</name>
+  <name>register-notificationSender</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 

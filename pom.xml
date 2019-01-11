@@ -21,7 +21,7 @@
     <modules>
 
         <module>register-client</module>
-        <module>register-seller</module>
+        <module>register-notificationSender</module>
         <module>location</module>
         <module>gateway</module>
         <module>message</module>
