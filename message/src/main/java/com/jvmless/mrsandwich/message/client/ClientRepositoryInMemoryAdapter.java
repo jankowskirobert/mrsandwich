@@ -1,10 +1,10 @@
-package com.jvmless.mrsandwich.message;
+package com.jvmless.mrsandwich.message.client;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
-class ClientRepositoryInMemoryAdapter implements ClientRepository {
+public class ClientRepositoryInMemoryAdapter implements ClientRepository {
 
     private Map<String, Client> inMemoryRepository = new ConcurrentHashMap<>();
 

@@ -1,4 +1,6 @@
-package com.jvmless.mrsandwich.message;
+package com.jvmless.mrsandwich.message.client;
+
+import com.jvmless.mrsandwich.message.client.Client;
 
 import java.util.stream.Stream;
 

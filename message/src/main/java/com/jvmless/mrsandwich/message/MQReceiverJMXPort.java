@@ -1,5 +1,7 @@
 package com.jvmless.mrsandwich.message;
 
+import com.jvmless.mrsandwich.message.client.ClientFacade;
+
 public class MQReceiverJMXPort implements MQReceiverPort {
     private ClientFacade clientFacade;
 

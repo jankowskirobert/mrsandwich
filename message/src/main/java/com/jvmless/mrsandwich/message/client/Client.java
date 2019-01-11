@@ -1,5 +1,6 @@
-package com.jvmless.mrsandwich.message;
+package com.jvmless.mrsandwich.message.client;
 
+import com.jvmless.mrsandwich.message.Location;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
