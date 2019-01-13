@@ -1,6 +1,7 @@
 package com.jvmless.mrsandwich;
 
 import com.jvmless.mrsandwich.message.*;
+import com.jvmless.mrsandwich.message.client.Availability;
 import com.jvmless.mrsandwich.message.client.Client;
 import com.jvmless.mrsandwich.message.client.ClientRepository;
 import com.jvmless.mrsandwich.message.client.ClientRepositoryInMemoryAdapter;
@@ -19,38 +20,40 @@ public class AppTest {
     private ClientRepository clientRepository = new ClientRepositoryInMemoryAdapter();
     private MessageRepository messageRepository = new MessageRepositoryInMemoryAdapter();
     private NotificationRepository notificationRepository = new NotificationRepositoryInMemoryAdapter();
+    private PushNotificationAdapter pushNotificationAdapter = new PushNotificationAdapterDummy();
+    private NotificationSenderRepository notificationSenderRepository = new NotificationSenderRepositoryInMemory();
     private static final String NOTIFICATION_EXIST = "EXIST-NOTIFICATION";
 
     @Before
     public void setUp() {
-        Client client = Client.of("ID", "FCM", Location.of(2.2, 2.3));
+        Client client = Client.of("ID", "FCM", Location.of(2.2, 2.3), TargetId.of("TARGET-LOCATION-ID"), new Availability());
         clientRepository.save(client);
 
+        Message messageForExistNotification = createBasicEnabledMessage(MessageId.of("MESSAGE-0"), NotificationSenderId.of("SELLER-1"));
         Notification notification = new Notification(
                 NotificationId.of(NOTIFICATION_EXIST),
                 new Client(),
-                new TargetArea(),
                 new NotificationSender(NotificationSenderId.of("SELLER-1")),
-                Message.of(
-                        MessageId.of(""),
-                        "Hello World",
-                        NotificationSenderId.of("SELLER-1"),
-                        LocalDateTime.now(),
-                        MessageStatus.ENABLED
-                ),
+                messageForExistNotification,
                 NotificationStatus.ENABLED
         );
         notificationRepository.save(notification);
 
         MessageId messageId = MessageId.of("MESSAGE-1");
-        Message helloWorld = Message.of(
+        NotificationSenderId senderId = NotificationSenderId.of("SELLER-1");
+        notificationSenderRepository.save(new NotificationSender(senderId));
+        Message helloWorld = createBasicEnabledMessage(messageId, senderId);
+        messageRepository.save(helloWorld);
+    }
+
+    private Message createBasicEnabledMessage(MessageId messageId, NotificationSenderId senderId) {
+        return Message.of(
                 messageId,
-                "Hello World",
-                NotificationSenderId.of("SELLER-1"),
+                "HELLO WORLD",
+                senderId,
                 LocalDateTime.now(),
                 MessageStatus.ENABLED
         );
-        messageRepository.save(helloWorld);
     }
 
     @Test
@@ -59,11 +62,18 @@ public class AppTest {
         MessageId messageId = MessageId.of("MESSAGE-1");
         NotifyClients notifyClients = NotifyClients.by(
                 notificationId,
-                NotificationSenderId.of("SANDWICH-SELLER-1"),
+                NotificationSenderId.of("SELLER-1"),
                 messageId,
                 LocalDateTime.now().plusMinutes(3),
-                TargetId.of("PLACE-1"));
-        NotifyClientsHandler notifyClientsHandler = new NotifyClientsHandler(notificationRepository, messageRepository);
+                TargetId.of("TARGET-LOCATION-ID")
+        );
+        NotifyClientsHandler notifyClientsHandler = new NotifyClientsHandler(
+                notificationRepository,
+                messageRepository,
+                clientRepository,
+                notificationSenderRepository,
+                pushNotificationAdapter
+        );
         notifyClientsHandler.handle(notifyClients);
     }
 
@@ -73,11 +83,18 @@ public class AppTest {
         MessageId messageId = MessageId.of("MESSAGE-1");
         NotifyClients notifyClients = NotifyClients.by(
                 notificationId,
-                NotificationSenderId.of("SANDWICH-SELLER-1"),
+                NotificationSenderId.of("SELLER-1"),
                 messageId,
                 LocalDateTime.now().plusMinutes(3),
-                TargetId.of("PLACE-1"));
-        NotifyClientsHandler notifyClientsHandler = new NotifyClientsHandler(notificationRepository, messageRepository);
+                TargetId.of("TARGET-LOCATION-ID")
+        );
+        NotifyClientsHandler notifyClientsHandler = new NotifyClientsHandler(
+                notificationRepository,
+                messageRepository,
+                clientRepository,
+                notificationSenderRepository,
+                pushNotificationAdapter
+        );
         notifyClientsHandler.handle(notifyClients);
 
     }

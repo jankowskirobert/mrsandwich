@@ -2,31 +2,22 @@ package com.jvmless.mrsandwich.message;
 
 import com.jvmless.mrsandwich.NotificationId;
 import com.jvmless.mrsandwich.message.client.Client;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 public class Notification {
     private NotificationId notificationId;
     private Client client;
-    private TargetArea target;
+    private TargetId target;
     private NotificationSender notificationSender;
     private Message message;
     private NotificationStatus status;
 
-    public static Notification of(
-            NotificationId notificationId,
-            Client client,
-            TargetArea targetArea,
-            NotificationSender notificationSender,
-            MessageId messageId
-    ){
-        return null;
-    }
 
-    public Notification(NotificationId notificationId, Client client, TargetArea target, NotificationSender notificationSender, Message message, NotificationStatus status) {
+    public Notification(NotificationId notificationId, Client client, NotificationSender notificationSender, Message message, NotificationStatus status) {
         this.notificationId = notificationId;
         this.client = client;
-        this.target = target;
         isMessageAndSenderMatch(notificationSender, message);
         this.status = status;
     }

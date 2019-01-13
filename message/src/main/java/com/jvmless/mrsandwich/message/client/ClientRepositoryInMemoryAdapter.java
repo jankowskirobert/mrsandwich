@@ -1,5 +1,7 @@
 package com.jvmless.mrsandwich.message.client;
 
+import com.jvmless.mrsandwich.message.TargetId;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
@@ -17,5 +19,17 @@ public class ClientRepositoryInMemoryAdapter implements ClientRepository {
     @Override
     public Stream<Client> findAll() {
         return inMemoryRepository.entrySet().stream().map(x -> x.getValue());
+    }
+
+    @Override
+    public Client find(ClientId id) {
+        return inMemoryRepository.get(id.getId());
+    }
+
+    @Override
+    public Stream<Client> findByTargetArea(TargetId targetArea) {
+        return inMemoryRepository.entrySet().stream().filter(
+                x -> x.getValue().getTargetId().equals(targetArea)
+        ).map(y -> y.getValue());
     }
 }
