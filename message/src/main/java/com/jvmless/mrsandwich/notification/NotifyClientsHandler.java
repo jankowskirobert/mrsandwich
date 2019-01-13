@@ -1,9 +1,11 @@
-package com.jvmless.mrsandwich.message;
+package com.jvmless.mrsandwich.notification;
 
-import com.jvmless.mrsandwich.NotificationId;
-import com.jvmless.mrsandwich.message.client.Client;
-import com.jvmless.mrsandwich.message.client.ClientRepository;
-import com.jvmless.mrsandwich.message.notification.commands.NotifyClients;
+import com.jvmless.mrsandwich.client.Client;
+import com.jvmless.mrsandwich.client.ClientRepository;
+import com.jvmless.mrsandwich.message.Message;
+import com.jvmless.mrsandwich.message.MessageNotFoundException;
+import com.jvmless.mrsandwich.message.MessageRepository;
+import com.jvmless.mrsandwich.notification.commands.NotifyClients;
 import lombok.NonNull;
 
 import java.util.stream.Stream;

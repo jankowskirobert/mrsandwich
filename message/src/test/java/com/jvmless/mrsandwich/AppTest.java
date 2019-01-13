@@ -1,11 +1,13 @@
 package com.jvmless.mrsandwich;
 
 import com.jvmless.mrsandwich.message.*;
-import com.jvmless.mrsandwich.message.client.Availability;
-import com.jvmless.mrsandwich.message.client.Client;
-import com.jvmless.mrsandwich.message.client.ClientRepository;
-import com.jvmless.mrsandwich.message.client.ClientRepositoryInMemoryAdapter;
-import com.jvmless.mrsandwich.message.notification.commands.NotifyClients;
+import com.jvmless.mrsandwich.client.Availability;
+import com.jvmless.mrsandwich.client.Client;
+import com.jvmless.mrsandwich.client.ClientRepository;
+import com.jvmless.mrsandwich.client.ClientRepositoryInMemoryAdapter;
+import com.jvmless.mrsandwich.notification.*;
+import com.jvmless.mrsandwich.notification.commands.NotifyClients;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -75,6 +77,9 @@ public class AppTest {
                 pushNotificationAdapter
         );
         notifyClientsHandler.handle(notifyClients);
+        Notification notification = notificationRepository.findBy(notificationId);
+        Assert.assertNotNull(notification);
+        Assert.assertTrue(notification.getStatus().equals(NotificationStatus.ENABLED));
     }
 
     @Test(expected = NotificationAlreadyExistException.class)
@@ -96,6 +101,5 @@ public class AppTest {
                 pushNotificationAdapter
         );
         notifyClientsHandler.handle(notifyClients);
-
     }
 }

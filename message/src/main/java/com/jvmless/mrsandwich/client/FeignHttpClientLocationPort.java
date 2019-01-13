@@ -1,6 +1,5 @@
-package com.jvmless.mrsandwich.message.client;
+package com.jvmless.mrsandwich.client;
 
-import com.jvmless.mrsandwich.message.client.ClientDto;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

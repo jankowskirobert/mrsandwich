@@ -1,4 +1,4 @@
-package com.jvmless.mrsandwich;
+package com.jvmless.mrsandwich.notification;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

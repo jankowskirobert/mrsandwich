@@ -1,6 +1,4 @@
-package com.jvmless.mrsandwich.message;
-
-import com.jvmless.mrsandwich.NotificationId;
+package com.jvmless.mrsandwich.notification;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

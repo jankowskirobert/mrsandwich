@@ -1,4 +1,4 @@
-package com.jvmless.mrsandwich.message;
+package com.jvmless.mrsandwich.notification;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

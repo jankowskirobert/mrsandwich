@@ -1,8 +1,8 @@
-package com.jvmless.mrsandwich.message.notification.commands;
+package com.jvmless.mrsandwich.notification.commands;
 
-import com.jvmless.mrsandwich.NotificationId;
+import com.jvmless.mrsandwich.notification.NotificationId;
 import com.jvmless.mrsandwich.message.MessageId;
-import com.jvmless.mrsandwich.message.NotificationSenderId;
+import com.jvmless.mrsandwich.notification.NotificationSenderId;
 import com.jvmless.mrsandwich.message.TargetId;
 import lombok.AllArgsConstructor;
 import lombok.Data;

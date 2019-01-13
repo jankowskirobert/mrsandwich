@@ -1,4 +1,4 @@
-package com.jvmless.mrsandwich.message.client;
+package com.jvmless.mrsandwich.client;
 
 class ClientLocationHttpAdapter implements ClientLocationApiPort {
 

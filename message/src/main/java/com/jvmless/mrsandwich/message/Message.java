@@ -1,5 +1,6 @@
 package com.jvmless.mrsandwich.message;
 
+import com.jvmless.mrsandwich.notification.NotificationSenderId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

@@ -1,8 +1,6 @@
-package com.jvmless.mrsandwich.message.client;
+package com.jvmless.mrsandwich.client;
 
-import com.jvmless.mrsandwich.message.TargetArea;
 import com.jvmless.mrsandwich.message.TargetId;
-import com.jvmless.mrsandwich.message.client.Client;
 
 import java.util.stream.Stream;
 

@@ -1,4 +1,4 @@
-package com.jvmless.mrsandwich.message.client;
+package com.jvmless.mrsandwich.client;
 
 import com.jvmless.mrsandwich.message.Location;
 import com.jvmless.mrsandwich.message.TargetId;

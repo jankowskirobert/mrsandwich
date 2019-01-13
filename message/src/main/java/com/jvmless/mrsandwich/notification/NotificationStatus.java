@@ -1,4 +1,4 @@
-package com.jvmless.mrsandwich.message;
+package com.jvmless.mrsandwich.notification;
 
 public enum NotificationStatus {
     ENABLED, DISABLED

@@ -1,6 +1,5 @@
-package com.jvmless.mrsandwich;
+package com.jvmless.mrsandwich.notification;
 
-import com.jvmless.mrsandwich.message.PushNotificationAdapter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
