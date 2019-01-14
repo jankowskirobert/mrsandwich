@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 interface SellerHttpApi {
 
     @GetMapping("/seller/{sellerId}")
-    SellerDto findByOrganization(@PathVariable("sellerId") Long sellerId);
+    SellerDto getSellerDetails(@PathVariable("sellerId") Long sellerId);
 
 }

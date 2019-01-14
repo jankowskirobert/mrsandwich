@@ -18,6 +18,7 @@ public class ClientFacade {
 
     private ClientRepository clientRepository;
     private MQSenderAdapter mqSenderAdapter;
+    private SellerHttpApi sellerHttpApi;
 
     public static ClientFacade of(ClientRepository clientRepository, MQSenderAdapter mqSenderAdapter) {
         return new ClientFacade(clientRepository, mqSenderAdapter);
@@ -85,5 +86,10 @@ public class ClientFacade {
         log.info("NEW SELLER");
     }
 
+
+    public void sellerDisables(SellerDisabled newSeller) {
+        log.info("Seller with id: "+newSeller.getSellerId()+" disabled");
+
+    }
 
 }
