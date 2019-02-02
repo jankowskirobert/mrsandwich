@@ -5,7 +5,7 @@ import com.jvmless.mrsandwich.client.dto.DisableClientDto;
 import com.jvmless.mrsandwich.client.dto.RegisterClientDto;
 import com.jvmless.mrsandwich.client.exceptions.MQException;
 
-public interface MQSenderAdapter {
+public interface MQSenderPort {
     void registerClientMessage(RegisterClientDto dto) throws MQException;
 
     void clientObserveSellerMessage(AddSellerDto dto) throws MQException;

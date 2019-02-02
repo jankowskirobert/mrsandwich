@@ -1,7 +1,8 @@
 package com.jvmless.mrsandwich.client;
 
+import com.jvmless.mrsandwich.client.mqadapters.MQReceiverAdapterDummy;
+import com.jvmless.mrsandwich.client.mqadapters.MQSenderAdapterDummy;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -21,13 +22,13 @@ class DeveloperClientConfiguration {
     }
 
     @Bean
-    public ClientFacade clientDevFacade(ClientRepository clientRepository, MQSenderAdapter mqSenderAdapter) {
+    public ClientFacade clientDevFacade(ClientRepository clientRepository, MQSenderPort mqSenderPort) {
         log.info("[DEVELOPER MODE] Client facade");
-        return new ClientFacade(clientRepository, mqSenderAdapter);
+        return new ClientFacade(clientRepository, mqSenderPort);
     }
 
     @Bean
-    public MQSenderAdapter dummyMqSender() {
+    public MQSenderPort dummyMqSender() {
         log.info("[DEVELOPER MODE] Client dummy MQ sender");
         return new MQSenderAdapterDummy();
     }
@@ -39,10 +40,10 @@ class DeveloperClientConfiguration {
 
     @Bean
     public MQReceiverPort mqReceiverPort(ClientFacade clientFacade, MBeanServer mBeanServer) throws MalformedObjectNameException, NotCompliantMBeanException, InstanceAlreadyExistsException, MBeanRegistrationException {
-        MQReceiverPortDummy mqReceiverPortDummy = new MQReceiverPortDummy(clientFacade);
-        StandardMBean mbean = new StandardMBean(mqReceiverPortDummy, MQReceiverPort.class);
+        MQReceiverAdapterDummy mqReceiverAdapterDummy = new MQReceiverAdapterDummy(clientFacade);
+        StandardMBean mbean = new StandardMBean(mqReceiverAdapterDummy, MQReceiverPort.class);
         ObjectName name = new ObjectName("MQReceiverDummy:type=JMX,name=MQReceiverDummyPort");
         mBeanServer.registerMBean(mbean, name);
-        return mqReceiverPortDummy;
+        return mqReceiverAdapterDummy;
     }
 }

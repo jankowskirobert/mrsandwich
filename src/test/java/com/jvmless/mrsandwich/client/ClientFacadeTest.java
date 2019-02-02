@@ -4,24 +4,27 @@ package com.jvmless.mrsandwich.client;
 import com.jvmless.mrsandwich.client.dto.DisableClientDto;
 import com.jvmless.mrsandwich.client.dto.RegisterClientDto;
 import com.jvmless.mrsandwich.client.exceptions.ClientRegisterException;
+import com.jvmless.mrsandwich.client.mqadapters.MQSenderAdapterDummy;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.util.Optional;
 import java.util.UUID;
 
+@ContextConfiguration
 public class ClientFacadeTest {
 
     ClientRepository clientRepository = new ClientRepositoryInMemory();
-    MQSenderAdapter mqSenderAdapter = new MQSenderAdapterDummy();
+    MQSenderPort mqSenderPort = new MQSenderAdapterDummy();
     ClientFacade clientFacade;
 
     @Before
     public void setUp() {
-        clientFacade = ClientFacade.of(clientRepository, mqSenderAdapter);
+        clientFacade = ClientFacade.of(clientRepository, mqSenderPort);
     }
 
     @Test(expected = ClientRegisterException.class)

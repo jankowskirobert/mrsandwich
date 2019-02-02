@@ -1,4 +1,4 @@
-package com.jvmless.mrsandwich.client;
+package com.jvmless.mrsandwich.client.mqadapters;
 
 import com.jvmless.mrsandwich.client.ClientFacade;
 import com.jvmless.mrsandwich.client.MQReceiverPort;
@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @RabbitListener
-class RabbitReceiverPort implements MQReceiverPort {
+public class RabbitReceiverAdapter implements MQReceiverPort {
 
     private ClientFacade clientFacade;
 
-    public RabbitReceiverPort(ClientFacade clientFacade) {
+    public RabbitReceiverAdapter(ClientFacade clientFacade) {
         this.clientFacade = clientFacade;
     }
 

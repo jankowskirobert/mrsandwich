@@ -17,16 +17,15 @@ import java.util.stream.Collectors;
 public class ClientFacade {
 
     private ClientRepository clientRepository;
-    private MQSenderAdapter mqSenderAdapter;
-    private SellerHttpApi sellerHttpApi;
+    private MQSenderPort mqSenderPort;
 
-    public static ClientFacade of(ClientRepository clientRepository, MQSenderAdapter mqSenderAdapter) {
-        return new ClientFacade(clientRepository, mqSenderAdapter);
+    public static ClientFacade of(ClientRepository clientRepository, MQSenderPort mqSenderPort) {
+        return new ClientFacade(clientRepository, mqSenderPort);
     }
 
-    public ClientFacade(ClientRepository clientRepository, MQSenderAdapter mqSenderAdapter) {
+    public ClientFacade(ClientRepository clientRepository, MQSenderPort mqSenderPort) {
         this.clientRepository = clientRepository;
-        this.mqSenderAdapter = mqSenderAdapter;
+        this.mqSenderPort = mqSenderPort;
     }
 
     public void registerClient(@Valid @NonNull RegisterClientDto dto) {
@@ -34,7 +33,7 @@ public class ClientFacade {
         try {
             log.info("New Client: {}", dto.toString());
             Client c = clientRepository.save(client);
-            mqSenderAdapter.registerClientMessage(dto);
+            mqSenderPort.registerClientMessage(dto);
         } catch (Exception ex) {
             throw new ClientRegisterException(ex);
         }
@@ -46,7 +45,7 @@ public class ClientFacade {
         saved.ifPresent(x -> {
             x.disable();
             clientRepository.update(x);
-            mqSenderAdapter.disableClientMessage(dto);
+            mqSenderPort.disableClientMessage(dto);
         });
     }
 
@@ -56,7 +55,7 @@ public class ClientFacade {
         saved.ifPresent(x -> {
             if (x.isEnable()) {
                 x.addSeller(dto.getSellerId());
-                mqSenderAdapter.clientObserveSellerMessage(dto);
+                mqSenderPort.clientObserveSellerMessage(dto);
             } else {
                 throw new ClientDisabledException();
             }

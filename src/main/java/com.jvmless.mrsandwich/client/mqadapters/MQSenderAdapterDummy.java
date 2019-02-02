@@ -1,5 +1,6 @@
-package com.jvmless.mrsandwich.client;
+package com.jvmless.mrsandwich.client.mqadapters;
 
+import com.jvmless.mrsandwich.client.MQSenderPort;
 import com.jvmless.mrsandwich.client.dto.AddSellerDto;
 import com.jvmless.mrsandwich.client.dto.DisableClientDto;
 import com.jvmless.mrsandwich.client.dto.RegisterClientDto;
@@ -7,7 +8,7 @@ import com.jvmless.mrsandwich.client.exceptions.MQException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-class MQSenderAdapterDummy implements MQSenderAdapter {
+public class MQSenderAdapterDummy implements MQSenderPort {
 
     @Override
     public void registerClientMessage(RegisterClientDto dto) {

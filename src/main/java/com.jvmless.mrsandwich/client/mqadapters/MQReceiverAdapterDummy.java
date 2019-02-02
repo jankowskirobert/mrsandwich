@@ -1,14 +1,16 @@
-package com.jvmless.mrsandwich.client;
+package com.jvmless.mrsandwich.client.mqadapters;
 
+import com.jvmless.mrsandwich.client.ClientFacade;
+import com.jvmless.mrsandwich.client.MQReceiverPort;
 import com.jvmless.mrsandwich.client.dto.NewSeller;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-class MQReceiverPortDummy implements MQReceiverPort {
+public class MQReceiverAdapterDummy implements MQReceiverPort {
 
     private ClientFacade clientFacade;
 
-    public MQReceiverPortDummy(ClientFacade clientFacade) {
+    public MQReceiverAdapterDummy(ClientFacade clientFacade) {
         this.clientFacade = clientFacade;
     }
 

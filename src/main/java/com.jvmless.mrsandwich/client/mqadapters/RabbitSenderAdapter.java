@@ -1,5 +1,6 @@
-package com.jvmless.mrsandwich.client;
+package com.jvmless.mrsandwich.client.mqadapters;
 
+import com.jvmless.mrsandwich.client.MQSenderPort;
 import com.jvmless.mrsandwich.client.dto.AddSellerDto;
 import com.jvmless.mrsandwich.client.dto.DisableClientDto;
 import com.jvmless.mrsandwich.client.dto.RegisterClientDto;
@@ -7,7 +8,7 @@ import com.jvmless.mrsandwich.client.exceptions.MQException;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
-class RabbitSenderAdapter implements MQSenderAdapter {
+public class RabbitSenderAdapter implements MQSenderPort {
 
     private final RabbitTemplate template;
 
