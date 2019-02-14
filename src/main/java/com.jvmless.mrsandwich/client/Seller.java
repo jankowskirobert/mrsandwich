@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Document(collection = "notificationSender")
+@Document(collection = "vendor")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 class Seller {
     private SellerId sellerId;

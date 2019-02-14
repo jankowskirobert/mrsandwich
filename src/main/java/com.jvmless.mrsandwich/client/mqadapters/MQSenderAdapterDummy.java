@@ -17,7 +17,7 @@ public class MQSenderAdapterDummy implements MQSenderPort {
 
     @Override
     public void clientObserveSellerMessage(AddSellerDto dto) throws MQException {
-        log.info("[Dummy MQ] client observe new notificationSender: {}", dto.getClientId());
+        log.info("[Dummy MQ] client observe new vendor: {}", dto.getClientId());
     }
 
     @Override

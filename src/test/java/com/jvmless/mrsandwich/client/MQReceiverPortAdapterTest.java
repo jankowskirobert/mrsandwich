@@ -25,7 +25,7 @@ public class MQReceiverPortAdapterTest {
 
     @Test
     public void shouldRegisterNewSeller() throws JsonProcessingException {
-        NewSellerEventBody newSellerEventBody = new NewSellerEventBody("notificationSenderId", "Seller Register");
+        NewSellerEventBody newSellerEventBody = new NewSellerEventBody("vendorId", "Seller Register");
         mqReceiverPort.newSellerRegistrationMessage(objectMapper.writeValueAsString(newSellerEventBody));
     }
 

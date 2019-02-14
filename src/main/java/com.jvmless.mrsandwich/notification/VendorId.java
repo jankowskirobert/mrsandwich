@@ -7,6 +7,6 @@ import lombok.Getter;
 @AllArgsConstructor(staticName = "of")
 @EqualsAndHashCode
 @Getter
-public class NotificationSenderId {
+public class VendorId {
     private String id;
 }

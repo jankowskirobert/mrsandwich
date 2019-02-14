@@ -5,15 +5,15 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class NotificationSenderRepositoryInMemory implements NotificationSenderRepository {
 
-    private Map<NotificationSenderId, NotificationSender> inMemoryRepository = new ConcurrentHashMap<>();
+    private Map<VendorId, Vendor> inMemoryRepository = new ConcurrentHashMap<>();
 
     @Override
-    public NotificationSender save(NotificationSender notificationSender) {
-        return inMemoryRepository.put(notificationSender.getNotificationSenderId(), notificationSender);
+    public Vendor save(Vendor vendor) {
+        return inMemoryRepository.put(vendor.getVendorId(), vendor);
     }
 
     @Override
-    public NotificationSender findBy(NotificationSenderId notificationSenderId) {
-        return inMemoryRepository.get(notificationSenderId);
+    public Vendor findBy(VendorId vendorId) {
+        return inMemoryRepository.get(vendorId);
     }
 }

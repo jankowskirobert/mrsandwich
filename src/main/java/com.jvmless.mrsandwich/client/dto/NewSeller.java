@@ -23,7 +23,7 @@ public class NewSeller {
             NewSellerEventBody eventBody = objectMapper.readValue(jsonMessage, NewSellerEventBody.class);
             return new NewSeller(eventBody.getSellerId());
         } catch (IOException | NullPointerException ex){
-            throw new MQException("Cannot parse new notificationSender registration event body", ex);
+            throw new MQException("Cannot parse new vendor registration event body", ex);
         }
     }
 }

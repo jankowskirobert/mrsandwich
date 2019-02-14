@@ -1,11 +1,11 @@
 package com.jvmless.mrsandwich;
 
-import com.jvmless.mrsandwich.message.*;
 import com.jvmless.mrsandwich.receiver.Availability;
 import com.jvmless.mrsandwich.receiver.Receiver;
 import com.jvmless.mrsandwich.receiver.ReceiverRepository;
 import com.jvmless.mrsandwich.receiver.ReceiverRepositoryInMemoryAdapter;
 import com.jvmless.mrsandwich.notification.*;
+import com.jvmless.mrsandwich.message.*;
 import com.jvmless.mrsandwich.notification.commands.NotifyClients;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,7 +22,7 @@ public class AppTest {
     private ReceiverRepository receiverRepository = new ReceiverRepositoryInMemoryAdapter();
     private MessageRepository messageRepository = new MessageRepositoryInMemoryAdapter();
     private NotificationRepository notificationRepository = new NotificationRepositoryInMemoryAdapter();
-    private PushNotificationAdapter pushNotificationAdapter = new PushNotificationAdapterDummy();
+    private NotificationSenderPort pushNotificationAdapter = new DummyToConsoleNotificationSenderAdapter();
     private NotificationSenderRepository notificationSenderRepository = new NotificationSenderRepositoryInMemory();
     private static final String NOTIFICATION_EXIST = "EXIST-NOTIFICATION";
 
@@ -31,24 +31,24 @@ public class AppTest {
         Receiver receiver = Receiver.of("ID", "FCM", Location.of(2.2, 2.3), TargetId.of("TARGET-LOCATION-ID"), new Availability());
         receiverRepository.save(receiver);
 
-        Message messageForExistNotification = createBasicEnabledMessage(MessageId.of("MESSAGE-0"), NotificationSenderId.of("SELLER-1"));
+        Message messageForExistNotification = createBasicEnabledMessage(MessageId.of("MESSAGE-0"), VendorId.of("SELLER-1"));
         Notification notification = new Notification(
                 NotificationId.of(NOTIFICATION_EXIST),
                 new Receiver(),
-                new NotificationSender(NotificationSenderId.of("SELLER-1")),
+                new Vendor(VendorId.of("SELLER-1")),
                 messageForExistNotification,
                 NotificationStatus.ENABLED
         );
         notificationRepository.save(notification);
 
         MessageId messageId = MessageId.of("MESSAGE-1");
-        NotificationSenderId senderId = NotificationSenderId.of("SELLER-1");
-        notificationSenderRepository.save(new NotificationSender(senderId));
+        VendorId senderId = VendorId.of("SELLER-1");
+        notificationSenderRepository.save(new Vendor(senderId));
         Message helloWorld = createBasicEnabledMessage(messageId, senderId);
         messageRepository.save(helloWorld);
     }
 
-    private Message createBasicEnabledMessage(MessageId messageId, NotificationSenderId senderId) {
+    private Message createBasicEnabledMessage(MessageId messageId, VendorId senderId) {
         return Message.of(
                 messageId,
                 "HELLO WORLD",
@@ -64,7 +64,7 @@ public class AppTest {
         MessageId messageId = MessageId.of("MESSAGE-1");
         NotifyClients notifyClients = NotifyClients.by(
                 notificationId,
-                NotificationSenderId.of("SELLER-1"),
+                VendorId.of("SELLER-1"),
                 messageId,
                 LocalDateTime.now().plusMinutes(3),
                 TargetId.of("TARGET-LOCATION-ID")
@@ -88,7 +88,7 @@ public class AppTest {
         MessageId messageId = MessageId.of("MESSAGE-1");
         NotifyClients notifyClients = NotifyClients.by(
                 notificationId,
-                NotificationSenderId.of("SELLER-1"),
+                VendorId.of("SELLER-1"),
                 messageId,
                 LocalDateTime.now().plusMinutes(3),
                 TargetId.of("TARGET-LOCATION-ID")

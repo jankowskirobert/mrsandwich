@@ -13,7 +13,7 @@ public class NewSellerRegistrationEvent implements MQEvent {
 
     public NewSellerRegistrationEvent(String id) {
         this.objectMapper = new ObjectMapper();
-        this.eventBody = new EventBody(id, "Created new notificationSender!");
+        this.eventBody = new EventBody(id, "Created new vendor!");
     }
 
     @Override

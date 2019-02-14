@@ -39,7 +39,7 @@ public class SellerFacade {
     public SellerDto getSeller(@NonNull String sellerId) {
         return mapper.map(
                 sellerRepository.find(sellerId).orElseThrow(
-                        () -> new SellerNotFoundException(String.format("Cannot find notificationSender with id: %s", sellerId))
+                        () -> new SellerNotFoundException(String.format("Cannot find vendor with id: %s", sellerId))
                 ), SellerDto.class);
 
     }

@@ -16,14 +16,14 @@ public class NotifyClientsHandler {
     private MessageRepository messageRepository;
     private ReceiverRepository receiverRepository;
     private NotificationSenderRepository notificationSenderRepository;
-    private PushNotificationAdapter pushNotificationAdapter;
+    private NotificationSenderPort notificationSenderPort;
 
-    public NotifyClientsHandler(NotificationRepository notificationRepository, MessageRepository messageRepository, ReceiverRepository receiverRepository, NotificationSenderRepository notificationSenderRepository, PushNotificationAdapter pushNotificationAdapter) {
+    public NotifyClientsHandler(NotificationRepository notificationRepository, MessageRepository messageRepository, ReceiverRepository receiverRepository, NotificationSenderRepository notificationSenderRepository, NotificationSenderPort notificationSenderPort) {
         this.notificationRepository = notificationRepository;
         this.messageRepository = messageRepository;
         this.receiverRepository = receiverRepository;
         this.notificationSenderRepository = notificationSenderRepository;
-        this.pushNotificationAdapter = pushNotificationAdapter;
+        this.notificationSenderPort = notificationSenderPort;
     }
 
     public void handle(@NonNull NotifyClients notifyClients) {
@@ -37,16 +37,16 @@ public class NotifyClientsHandler {
         }
         Stream<Receiver> clients = receiverRepository.findByTargetArea(notifyClients.getTargetArea());
         NotificationId newId = notifyClients.getNotificationId();
-        NotificationSender notificationSender = notificationSenderRepository.findBy(notifyClients.getNotificationSenderId());
+        Vendor vendor = notificationSenderRepository.findBy(notifyClients.getVendorId());
         clients.forEach(client -> {
                 Notification notification = new Notification(
                         newId,
                         client,
-                        notificationSender,
+                        vendor,
                         message,
                         NotificationStatus.ENABLED
                 );
-                pushNotificationAdapter.send(client.getFcmRegistrationId(), message.getMessageBody());
+//                pushNotificationAdapter.send(client.getFcmRegistrationId(), message.getMessageBody());
                 notificationRepository.save(notification);
         });
 

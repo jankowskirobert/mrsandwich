@@ -10,21 +10,21 @@ public class Notification {
     private NotificationId notificationId;
     private Receiver receiver;
     private TargetId target;
-    private NotificationSender notificationSender;
+    private Vendor vendor;
     private Message message;
     private NotificationStatus status;
 
 
-    public Notification(NotificationId notificationId, Receiver receiver, NotificationSender notificationSender, Message message, NotificationStatus status) {
+    public Notification(NotificationId notificationId, Receiver receiver, Vendor vendor, Message message, NotificationStatus status) {
         this.notificationId = notificationId;
         this.receiver = receiver;
-        isMessageAndSenderMatch(notificationSender, message);
+        isMessageAndSenderMatch(vendor, message);
         this.status = status;
     }
 
-    private void isMessageAndSenderMatch(NotificationSender notificationSender, Message message) {
-        if(notificationSender.getNotificationSenderId().equals(message.getOwner())) {
-            this.notificationSender = notificationSender;
+    private void isMessageAndSenderMatch(Vendor vendor, Message message) {
+        if(vendor.getVendorId().equals(message.getOwner())) {
+            this.vendor = vendor;
             this.message = message;
         } else {
             throw new IllegalStateException("Notification sender doesn't match message owner");

@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class NotificationSender {
-    private NotificationSenderId notificationSenderId;
+public class Vendor {
+    private VendorId vendorId;
 }
