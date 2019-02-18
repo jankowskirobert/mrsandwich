@@ -1,4 +1,4 @@
-package com.jvmless.mrsandwich.notification.commands;
+package com.jvmless.mrsandwich.notification.application;
 
 import com.jvmless.mrsandwich.notification.NotificationId;
 import com.jvmless.mrsandwich.message.MessageId;

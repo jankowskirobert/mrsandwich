@@ -1,5 +1,5 @@
 package com.jvmless.mrsandwich.notification;
 
 public enum NotificationStatus {
-    ENABLED, DISABLED
+    FINISHED_SENDING, IN_PROGRESS, WAITING
 }

@@ -5,29 +5,38 @@ import com.jvmless.mrsandwich.message.Message;
 import com.jvmless.mrsandwich.message.TargetId;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class Notification {
     private NotificationId notificationId;
-    private Receiver receiver;
+    private List<Recipient> receivers = new ArrayList<>();
     private TargetId target;
     private Vendor vendor;
-    private Message message;
+    private MessageDetails message;
     private NotificationStatus status;
 
 
-    public Notification(NotificationId notificationId, Receiver receiver, Vendor vendor, Message message, NotificationStatus status) {
+    public Notification(NotificationId notificationId, Vendor vendor, MessageDetails message) {
         this.notificationId = notificationId;
-        this.receiver = receiver;
-        isMessageAndSenderMatch(vendor, message);
-        this.status = status;
+        this.message = message;
+        this.vendor = vendor;
+        this.status = NotificationStatus.WAITING;
     }
 
-    private void isMessageAndSenderMatch(Vendor vendor, Message message) {
-        if(vendor.getVendorId().equals(message.getOwner())) {
-            this.vendor = vendor;
-            this.message = message;
-        } else {
-            throw new IllegalStateException("Notification sender doesn't match message owner");
-        }
+    public void addReceiver(Recipient receiver) {
+        if(receivers.contains(receiver))
+            throw new IllegalArgumentException("Receiver already signed");
+        else
+            receivers.add(receiver);
+    }
+
+    public int countRecivers() {
+        return receivers.size();
+    }
+
+    public void delivered() {
+        this.status = NotificationStatus.FINISHED_SENDING;
     }
 }

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor(staticName = "of")
 @NoArgsConstructor
 public class Receiver {
-    private String id;
+    private String clientId;
     private String fcmRegistrationId;
     private Location location;
     private TargetId targetId;

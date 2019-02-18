@@ -1,12 +1,13 @@
 package com.jvmless.mrsandwich;
 
+import com.jvmless.mrsandwich.notification.application.NotifyClientsHandler;
 import com.jvmless.mrsandwich.receiver.Availability;
 import com.jvmless.mrsandwich.receiver.Receiver;
 import com.jvmless.mrsandwich.receiver.ReceiverRepository;
 import com.jvmless.mrsandwich.receiver.ReceiverRepositoryInMemoryAdapter;
 import com.jvmless.mrsandwich.notification.*;
 import com.jvmless.mrsandwich.message.*;
-import com.jvmless.mrsandwich.notification.commands.NotifyClients;
+import com.jvmless.mrsandwich.notification.application.NotifyClients;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,10 +35,8 @@ public class AppTest {
         Message messageForExistNotification = createBasicEnabledMessage(MessageId.of("MESSAGE-0"), VendorId.of("SELLER-1"));
         Notification notification = new Notification(
                 NotificationId.of(NOTIFICATION_EXIST),
-                new Receiver(),
                 new Vendor(VendorId.of("SELLER-1")),
-                messageForExistNotification,
-                NotificationStatus.ENABLED
+                new MessageDetails(messageForExistNotification.getMessageBody())
         );
         notificationRepository.save(notification);
 
@@ -79,7 +78,7 @@ public class AppTest {
         notifyClientsHandler.handle(notifyClients);
         Notification notification = notificationRepository.findBy(notificationId);
         Assert.assertNotNull(notification);
-        Assert.assertTrue(notification.getStatus().equals(NotificationStatus.ENABLED));
+        Assert.assertTrue(notification.getStatus().equals(NotificationStatus.WAITING));
     }
 
     @Test(expected = NotificationAlreadyExistException.class)
