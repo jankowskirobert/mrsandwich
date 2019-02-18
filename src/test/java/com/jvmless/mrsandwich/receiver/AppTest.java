@@ -1,10 +1,6 @@
-package com.jvmless.mrsandwich;
+package com.jvmless.mrsandwich.receiver;
 
 import com.jvmless.mrsandwich.notification.application.NotifyClientsHandler;
-import com.jvmless.mrsandwich.receiver.Availability;
-import com.jvmless.mrsandwich.receiver.Receiver;
-import com.jvmless.mrsandwich.receiver.ReceiverRepository;
-import com.jvmless.mrsandwich.receiver.ReceiverRepositoryInMemoryAdapter;
 import com.jvmless.mrsandwich.notification.*;
 import com.jvmless.mrsandwich.message.*;
 import com.jvmless.mrsandwich.notification.application.NotifyClients;
@@ -13,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -76,9 +73,9 @@ public class AppTest {
                 pushNotificationAdapter
         );
         notifyClientsHandler.handle(notifyClients);
-        Notification notification = notificationRepository.findBy(notificationId);
-        Assert.assertNotNull(notification);
-        Assert.assertTrue(notification.getStatus().equals(NotificationStatus.WAITING));
+        Optional<Notification> notification = notificationRepository.findBy(notificationId);
+        Assert.assertTrue(notification.isPresent());
+        Assert.assertTrue(notification.get().getStatus().equals(NotificationStatus.WAITING));
     }
 
     @Test(expected = NotificationAlreadyExistException.class)

@@ -1,6 +1,7 @@
 package com.jvmless.mrsandwich.notification;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class NotificationRepositoryInMemoryAdapter implements NotificationRepository {
@@ -13,7 +14,7 @@ public class NotificationRepositoryInMemoryAdapter implements NotificationReposi
     }
 
     @Override
-    public Notification findBy(NotificationId notificationId) {
-        return inMemoryRepository.get(notificationId);
+    public Optional<Notification> findBy(NotificationId notificationId) {
+        return Optional.ofNullable(inMemoryRepository.get(notificationId));
     }
 }

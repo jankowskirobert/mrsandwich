@@ -1,6 +1,8 @@
 package com.jvmless.mrsandwich.notification;
 
+import java.util.Optional;
+
 public interface NotificationRepository {
     Notification save(Notification notification);
-    Notification findBy(NotificationId notificationId);
+    Optional<Notification> findBy(NotificationId notificationId);
 }

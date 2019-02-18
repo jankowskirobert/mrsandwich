@@ -9,6 +9,7 @@ import com.jvmless.mrsandwich.message.MessageRepository;
 import com.jvmless.mrsandwich.notification.application.NotifyClients;
 import lombok.NonNull;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class NotifyClientsHandler {
@@ -33,10 +34,11 @@ public class NotifyClientsHandler {
     }
 
     public void handle(@NonNull NotifyClients notifyClients) {
-        Notification old = notificationRepository.findBy(notifyClients.getNotificationId());
-        if (old != null) {
+        Optional<Notification> old = notificationRepository.findBy(notifyClients.getNotificationId());
+        old.ifPresent(x -> {
             throw new NotificationAlreadyExistException("Id already in database");
-        }
+        });
+
         Message messageBody = messageRepository.findBy(notifyClients.getMessageId());
 
         if (messageBody == null) {
