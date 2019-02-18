@@ -8,10 +8,12 @@ import lombok.NoArgsConstructor;
 import java.util.UUID;
 
 @AllArgsConstructor(staticName = "of")
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @EqualsAndHashCode
 public class NotificationId {
     private String id;
+
+    public NotificationId() {
+    }
 
     public static NotificationId random() {
         return new NotificationId(UUID.randomUUID().toString());

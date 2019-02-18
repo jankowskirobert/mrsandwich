@@ -4,12 +4,16 @@ import com.jvmless.mrsandwich.receiver.Receiver;
 import com.jvmless.mrsandwich.message.Message;
 import com.jvmless.mrsandwich.message.TargetId;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Document(collection = "notifications")
 public class Notification {
+    @Id
     private NotificationId notificationId;
     private List<Recipient> receivers = new ArrayList<>();
     private TargetId target;

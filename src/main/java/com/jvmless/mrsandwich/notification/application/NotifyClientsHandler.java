@@ -53,7 +53,7 @@ public class NotifyClientsHandler {
             );
             clients.forEach(client -> {
                 notificationSenderPort.send(client.getFcmRegistrationId(), message.getMessageBody());
-                notification.addReceiver(new Recipient(client.getClientId(), client.getFcmRegistrationId()));
+                notification.addReceiver(new Recipient(client.getId(), client.getFcmRegistrationId()));
                 notification.delivered();
                 notificationRepository.save(notification);
             });
