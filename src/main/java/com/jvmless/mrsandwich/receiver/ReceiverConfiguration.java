@@ -1,14 +1,15 @@
-package com.jvmless.mrsandwich.message;
+package com.jvmless.mrsandwich.receiver;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-@Profile("dev")
 @Configuration
-public class DeveloperMessageConfiguration {
+@Profile("dev")
+public class ReceiverConfiguration {
+
     @Bean
-    MessageRepository messageRepository() {
-        return new MessageRepositoryInMemoryAdapter();
+    ReceiverRepository receiverRepository() {
+        return new ReceiverRepositoryInMemoryAdapter();
     }
 }
