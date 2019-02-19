@@ -1,7 +1,5 @@
 package com.jvmless.mrsandwich.notification;
 
-import com.jvmless.mrsandwich.receiver.Receiver;
-import com.jvmless.mrsandwich.message.Message;
 import com.jvmless.mrsandwich.message.TargetId;
 import lombok.Data;
 import org.springframework.data.annotation.Id;

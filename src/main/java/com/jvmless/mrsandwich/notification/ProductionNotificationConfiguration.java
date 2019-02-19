@@ -14,8 +14,8 @@ import org.springframework.context.annotation.Profile;
 public class ProductionNotificationConfiguration {
 
     @Bean
-    NotificationRepository notificationRepository() {
-        return new NotificationRepositoryInMemoryAdapter();
+    NotificationRepository notificationRepository(MongoNotificationRepository mongoNotificationRepository) {
+        return new MongoNotificationRepositoryAdapter(mongoNotificationRepository);
     }
 
     @Bean

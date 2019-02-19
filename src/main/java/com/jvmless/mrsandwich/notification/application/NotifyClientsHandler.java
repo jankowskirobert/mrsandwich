@@ -1,12 +1,13 @@
 package com.jvmless.mrsandwich.notification.application;
 
 import com.jvmless.mrsandwich.notification.*;
+import com.jvmless.mrsandwich.notification.NotificationException;
+import com.jvmless.mrsandwich.notification.Recipient;
 import com.jvmless.mrsandwich.receiver.Receiver;
 import com.jvmless.mrsandwich.receiver.ReceiverRepository;
 import com.jvmless.mrsandwich.message.Message;
 import com.jvmless.mrsandwich.message.MessageNotFoundException;
 import com.jvmless.mrsandwich.message.MessageRepository;
-import com.jvmless.mrsandwich.notification.application.NotifyClients;
 import lombok.NonNull;
 
 import java.util.Optional;
@@ -46,6 +47,9 @@ public class NotifyClientsHandler {
         } else {
             MessageDetails message = new MessageDetails(messageBody.getMessageBody());
             Stream<Receiver> clients = receiverRepository.findByTargetArea(notifyClients.getTargetArea());
+            if(clients.count() <= 0) {
+                throw new NotificationException("Selected target contains 0 active clients");
+            }
             NotificationId newId = notifyClients.getNotificationId();
             Vendor vendor = notificationSenderRepository.findBy(notifyClients.getVendorId());
             Notification notification = new Notification(

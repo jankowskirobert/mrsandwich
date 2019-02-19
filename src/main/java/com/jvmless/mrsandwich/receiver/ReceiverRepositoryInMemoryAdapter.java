@@ -3,6 +3,7 @@ package com.jvmless.mrsandwich.receiver;
 import com.jvmless.mrsandwich.message.TargetId;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
@@ -22,8 +23,8 @@ public class ReceiverRepositoryInMemoryAdapter implements ReceiverRepository {
     }
 
     @Override
-    public Receiver find(ClientId id) {
-        return inMemoryRepository.get(id.getId());
+    public Optional<Receiver> find(ClientId id) {
+        return Optional.ofNullable(inMemoryRepository.get(id.getId()));
     }
 
     @Override
