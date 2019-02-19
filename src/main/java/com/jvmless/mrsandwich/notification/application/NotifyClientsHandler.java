@@ -40,14 +40,14 @@ public class NotifyClientsHandler {
             throw new NotificationAlreadyExistException("Id already in database");
         });
 
-        Message messageBody = messageRepository.findBy(notifyClients.getMessageId());
+        Optional<Message> message = messageRepository.findBy(notifyClients.getMessageId());
 
-        if (messageBody == null) {
+        if (!message.isPresent()) {
             throw new MessageNotFoundException("Cannot find message with id: " + notifyClients.getMessageId());
         } else {
-            MessageDetails message = new MessageDetails(messageBody.getMessageBody());
+            MessageDetails messageDetails = new MessageDetails(message.get().getMessageBody());
             Stream<Receiver> clients = receiverRepository.findByTargetArea(notifyClients.getTargetArea());
-            if(clients.count() <= 0) {
+            if (clients.count() <= 0) {
                 throw new NotificationException("Selected target contains 0 active clients");
             }
             NotificationId newId = notifyClients.getNotificationId();
@@ -55,10 +55,10 @@ public class NotifyClientsHandler {
             Notification notification = new Notification(
                     newId,
                     vendor,
-                    message
+                    messageDetails
             );
             clients.forEach(client -> {
-                notificationSenderPort.send(client.getFcmRegistrationId(), message.getMessageBody());
+                notificationSenderPort.send(client.getFcmRegistrationId(), messageDetails.getMessageBody());
                 notification.addReceiver(new Recipient(client.getId(), client.getFcmRegistrationId()));
                 notification.delivered();
                 notificationRepository.save(notification);

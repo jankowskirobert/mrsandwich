@@ -1,6 +1,8 @@
 package com.jvmless.mrsandwich.message;
 
+import java.util.Optional;
+
 public interface MessageRepository {
-    Message findBy(MessageId messageId);
+    Optional<Message> findBy(MessageId messageId);
     Message save(Message message);
 }
