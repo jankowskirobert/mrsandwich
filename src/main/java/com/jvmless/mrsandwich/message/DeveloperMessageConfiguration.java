@@ -11,4 +11,8 @@ public class DeveloperMessageConfiguration {
     MessageRepository messageRepository() {
         return new MessageRepositoryInMemoryAdapter();
     }
+    @Bean
+    MessageFacade messageFacade(MessageRepository messageRepository) {
+        return new MessageFacade(messageRepository);
+    }
 }

@@ -34,7 +34,7 @@ public class NotifyClientsHandler {
         this.notificationSenderPort = notificationSenderPort;
     }
 
-    public void handle(@NonNull NotifyClients notifyClients) {
+    public void handle(@NonNull NotifyClients notifyClients) throws RuntimeException {
         Optional<Notification> old = notificationRepository.findBy(notifyClients.getNotificationId());
         old.ifPresent(x -> {
             throw new NotificationAlreadyExistException("Id already in database");
