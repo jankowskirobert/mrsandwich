@@ -1,6 +1,7 @@
 package com.jvmless.mrsandwich.seller;
 
 
+import com.jvmless.mrsandwich.seller.api.CreateSeller;
 import com.jvmless.mrsandwich.seller.dto.SellerDto;
 import com.jvmless.mrsandwich.seller.dto.SellerRegisterDto;
 import com.jvmless.mrsandwich.seller.dto.UpdateSellerPersonalDataDto;
@@ -22,11 +23,11 @@ public class SellerFacade {
     private final ModelMapper mapper = new ModelMapper();
     private SellerRepository sellerRepository;
 
-    protected void registerSeller(SellerRegisterDto dto) {
+    public void registerSeller(SellerRegisterDto dto) {
         Seller seller = sellerRepository.save(Seller.by(dto));
     }
 
-    protected void updateSellerPersonalData(UpdateSellerPersonalDataDto dto) {
+    public void updateSellerPersonalData(UpdateSellerPersonalDataDto dto) {
         PersonalData personalData = PersonalData.of(dto);
         Optional<Seller> seller = sellerRepository.find(dto.getSellerId());
         seller.ifPresent(x -> x.updatePersonalData(personalData));
@@ -41,6 +42,10 @@ public class SellerFacade {
                 sellerRepository.find(sellerId).orElseThrow(
                         () -> new SellerNotFoundException(String.format("Cannot find vendor with id: %s", sellerId))
                 ), SellerDto.class);
+
+    }
+
+    public void createSeller(CreateSeller createSeller) {
 
     }
 }

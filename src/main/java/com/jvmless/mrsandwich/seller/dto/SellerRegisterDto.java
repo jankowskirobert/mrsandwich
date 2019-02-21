@@ -6,7 +6,7 @@ import java.util.List;
 
 @Data
 public class SellerRegisterDto {
-    private String id;
+    private String id ;
     private String firstName;
     private String lastName;
     private String city;

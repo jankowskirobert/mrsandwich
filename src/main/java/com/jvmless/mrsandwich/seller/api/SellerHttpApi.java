@@ -1,11 +1,10 @@
 package com.jvmless.mrsandwich.seller.api;
 
+import com.jvmless.mrsandwich.seller.SellerId;
 import com.jvmless.mrsandwich.seller.dto.SellerDto;
 import com.jvmless.mrsandwich.seller.SellerFacade;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.jvmless.mrsandwich.seller.dto.SellerRegisterDto;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 /*
@@ -30,4 +29,12 @@ class SellerHttpApi {
     public List<SellerDto> getAvailableSellers() {
         return sellerFacade.getAvailableSellers();
     }
+
+    @RequestMapping(path = "/register", method = RequestMethod.POST)
+    public SellerId createSeller(@RequestBody SellerRegisterDto createSeller) {
+        sellerFacade.registerSeller(createSeller);
+        return new SellerId();
+    }
+
+
 }
