@@ -33,7 +33,7 @@ class SellerHttpApi {
     @RequestMapping(path = "/register", method = RequestMethod.POST)
     public SellerId createSeller(@RequestBody SellerRegisterDto createSeller) {
         sellerFacade.registerSeller(createSeller);
-        return new SellerId();
+        return new SellerId(createSeller.getId());
     }
 
 
