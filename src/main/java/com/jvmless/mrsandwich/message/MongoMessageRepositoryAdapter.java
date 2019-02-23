@@ -26,6 +26,6 @@ public class MongoMessageRepositoryAdapter implements MessageRepository {
 
     @Override
     public List<Message> findAll(VendorId vendorId) {
-        return mongoMessageRepository.findAllByVendorId(vendorId);
+        return mongoMessageRepository.findAllByOwner(vendorId);
     }
 }
