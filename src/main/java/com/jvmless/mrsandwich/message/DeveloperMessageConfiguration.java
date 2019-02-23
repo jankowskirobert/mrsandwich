@@ -1,5 +1,6 @@
 package com.jvmless.mrsandwich.message;
 
+import com.jvmless.mrsandwich.seller.SellerRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -11,8 +12,9 @@ public class DeveloperMessageConfiguration {
     MessageRepository messageRepository() {
         return new MessageRepositoryInMemoryAdapter();
     }
+
     @Bean
-    MessageFacade messageFacade(MessageRepository messageRepository) {
-        return new MessageFacade(messageRepository);
+    MessageFacade messageFacade(MessageRepository messageRepository, SellerRepository sellerRepository) {
+        return new MessageFacade(messageRepository, sellerRepository);
     }
 }

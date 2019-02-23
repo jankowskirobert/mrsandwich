@@ -1,7 +1,9 @@
 package com.jvmless.mrsandwich.message;
 
+import com.jvmless.mrsandwich.notification.VendorId;
 import com.jvmless.mrsandwich.receiver.MongoReceiverRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public class MongoMessageRepositoryAdapter implements MessageRepository {
@@ -20,5 +22,10 @@ public class MongoMessageRepositoryAdapter implements MessageRepository {
     @Override
     public Message save(Message message) {
         return mongoMessageRepository.save(message);
+    }
+
+    @Override
+    public List<Message> findAll(VendorId vendorId) {
+        return mongoMessageRepository.findAllByVendorId(vendorId);
     }
 }
