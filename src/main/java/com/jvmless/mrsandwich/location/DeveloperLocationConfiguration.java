@@ -14,6 +14,11 @@ class DeveloperLocationConfiguration {
     }
 
     @Bean
+    public MQReceiver mqReceiver(ClientLocationRepository clientLocationRepository) {
+        return new MQReceiverSpringEventAdapter(clientLocationRepository);
+    }
+
+    @Bean
     public ClientLocationRepository inMemoryLocationRepository() {
         return new ClientLocationRepositoryInMemory();
     }

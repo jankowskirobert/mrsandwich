@@ -46,6 +46,7 @@ public class NotifyClientsHandler {
             throw new MessageNotFoundException("Cannot find message with id: " + notifyClients.getMessageId());
         } else {
             MessageDetails messageDetails = new MessageDetails(message.get().getMessageBody());
+            //wrong = download all clients that are subscribe vendor id
             Stream<Receiver> clients = receiverRepository.findByTargetArea(notifyClients.getTargetArea());
             if (clients.count() <= 0) {
                 throw new NotificationException("Selected target contains 0 active clients");

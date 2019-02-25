@@ -1,11 +1,12 @@
 package com.jvmless.mrsandwich.location.dto;
 
 import com.jvmless.mrsandwich.location.Address;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-@Data()
-@Accessors(fluent = true)
+@Data
+@AllArgsConstructor
 public class CurrentClientLocation {
     private String id;
     private boolean custom;

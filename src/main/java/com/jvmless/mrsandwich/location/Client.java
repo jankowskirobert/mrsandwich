@@ -3,12 +3,17 @@ package com.jvmless.mrsandwich.location;
 import com.jvmless.mrsandwich.location.dto.CurrentClientLocation;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@EqualsAndHashCode(of = "id")
+@Document(collection = "locations")
 public class Client {
-
+    @Id
     private String id;
     private ClientLocation clientLocation;
 

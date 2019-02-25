@@ -21,10 +21,10 @@ public class ClientLocation {
 
     public static ClientLocation as(CurrentClientLocation currentClientLocation) {
         return new ClientLocation(
-                currentClientLocation.longitude(),
-                currentClientLocation.latitude(),
-                currentClientLocation.custom(),
-                currentClientLocation.address()
+                currentClientLocation.getLongitude(),
+                currentClientLocation.getLatitude(),
+                currentClientLocation.isCustom(),
+                currentClientLocation.getAddress()
         );
     }
 

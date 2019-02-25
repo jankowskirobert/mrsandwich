@@ -11,7 +11,7 @@ public class LocationFacade {
     }
 
     public void updateClientLocation(CurrentClientLocation currentClientLocation) {
-        clientLocationRepository.findOne(currentClientLocation.id()).ifPresent(
+        clientLocationRepository.findOne(currentClientLocation.getId()).ifPresent(
                 x -> {
                     x.changeCurrentLocation(currentClientLocation);
                     clientLocationRepository.save(x);

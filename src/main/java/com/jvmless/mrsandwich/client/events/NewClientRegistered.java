@@ -1,14 +1,12 @@
-package com.jvmless.mrsandwich.location;
+package com.jvmless.mrsandwich.client.events;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-/*
-Event
- */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class IncomingClient {
+public class NewClientRegistered {
     private String id;
 }

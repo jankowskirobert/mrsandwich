@@ -1,5 +1,6 @@
 package com.jvmless.mrsandwich.seller;
 
+import com.jvmless.mrsandwich.client.events.NewClientRegistered;
 import com.jvmless.mrsandwich.seller.dto.SellerRegisterDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;

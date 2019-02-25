@@ -2,7 +2,9 @@ package com.jvmless.mrsandwich.client;
 
 import com.jvmless.mrsandwich.client.mqadapters.MQReceiverAdapterDummy;
 import com.jvmless.mrsandwich.client.mqadapters.MQSenderAdapterDummy;
+import com.jvmless.mrsandwich.client.mqadapters.MQSenderSpringEventAdapter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -28,9 +30,9 @@ class DeveloperClientConfiguration {
     }
 
     @Bean
-    public MQSenderPort dummyMqSender() {
+    public MQSenderPort dummyMqSender(ApplicationEventPublisher applicationEventPublisher) {
         log.info("[DEVELOPER MODE] Client dummy MQ sender");
-        return new MQSenderAdapterDummy();
+        return new MQSenderSpringEventAdapter(applicationEventPublisher);
     }
 
     @Bean
