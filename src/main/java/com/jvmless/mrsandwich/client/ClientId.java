@@ -11,6 +11,7 @@ import java.util.UUID;
 @EqualsAndHashCode
 @Getter
 @Accessors(fluent = true)
+public
 class ClientId {
     private String id;
 

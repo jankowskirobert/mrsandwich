@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Subscriber {
     private SubscriberId subscriberId;
-    private List<Location> location;
+    private Location location;
     private SubscriptionStatus subscriptionStatus;
 
     public void activate() {

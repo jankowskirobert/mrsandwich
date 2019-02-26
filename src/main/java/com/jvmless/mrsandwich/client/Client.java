@@ -11,26 +11,26 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 @Document(collection = "client")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-class Client {
+public class Client {
     @Id
     private ClientId clientId;
     private ClientStatus status;
     private LocalDateTime terminated;
     private LocalDateTime created;
-    private Set<Seller> sellers;
 
     public String id() {
         return clientId.id();
     }
 
     public static Client by(@NonNull RegisterClientDto dto) {
-        return new Client(new ClientId(dto.getClientId()), ClientStatus.ENABLE, null, LocalDateTime.now(), new HashSet<>());
+        return null;
     }
 
     public boolean isEnable() {
@@ -46,17 +46,7 @@ class Client {
         terminated = LocalDateTime.now();
     }
 
-    public void addSeller(String sellerId) {
-        Seller seller = Seller.of(sellerId);
-        if (!sellers.contains(seller)) {
-            sellers.add(seller);
-        }
-    }
 
-    public void removeSeller(String sellerId) {
-        Seller seller = Seller.of(sellerId);
-        sellers.stream().filter(x -> x.equals(seller)).forEach(x -> x.deactivate());
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -64,10 +54,6 @@ class Client {
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
         return Objects.equals(clientId, client.clientId);
-    }
-
-    public Set<Seller> getSellers() {
-        return sellers;
     }
 
     @Override

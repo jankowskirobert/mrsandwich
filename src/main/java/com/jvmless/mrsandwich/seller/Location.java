@@ -1,4 +1,4 @@
 package com.jvmless.mrsandwich.seller;
 
-class Location {
+public class Location {
 }
