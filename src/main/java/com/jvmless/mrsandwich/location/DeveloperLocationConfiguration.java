@@ -19,8 +19,8 @@ class DeveloperLocationConfiguration {
     }
 
     @Bean
-    public ClientLocationRepository inMemoryLocationRepository() {
-        return new ClientLocationRepositoryInMemory();
+    public LocationRepository inMemoryLocationRepository() {
+        return new LocationRepositoryInMemory();
     }
 
 }

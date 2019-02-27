@@ -29,8 +29,9 @@ public class Client {
         return clientId.id();
     }
 
-    public static Client by(@NonNull RegisterClientDto dto) {
-        return null;
+    protected Client (ClientId clientId, ClientStatus clientStatus) {
+        this.clientId=clientId;
+        this.status = clientStatus;
     }
 
     public boolean isEnable() {

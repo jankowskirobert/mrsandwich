@@ -1,5 +1,6 @@
 package com.jvmless.mrsandwich.seller;
 
+import com.jvmless.mrsandwich.location.Location;
 import com.jvmless.mrsandwich.seller.dto.SellerRegisterDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,10 +23,9 @@ public class Seller {
     private List<Location> handlingTargetLocations;
     private LocalDateTime personalDataUpdateTime;
 
-
-    public static Seller by(SellerRegisterDto dto) {
-        return null
-                ;
+   protected Seller (SellerId sellerId, List<Location> locations) {
+        this.id = sellerId;
+        this.handlingTargetLocations = locations;
     }
 
     public void updatePersonalData(PersonalData personalData) {

@@ -1,4 +1,4 @@
-package com.jvmless.mrsandwich.seller;
+package com.jvmless.mrsandwich.subscription;
 
 public enum SubscriptionStatus {
 

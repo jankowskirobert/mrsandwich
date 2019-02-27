@@ -24,7 +24,7 @@ public class SellerFacade {
     private SellerRepository sellerRepository;
 
     public void registerSeller(SellerRegisterDto dto) {
-        Seller seller = sellerRepository.save(Seller.by(dto));
+        Seller seller = sellerRepository.save(SellerFactory.createNeSeller(dto.getId()));
     }
 
     public void updateSellerPersonalData(UpdateSellerPersonalDataDto dto) {

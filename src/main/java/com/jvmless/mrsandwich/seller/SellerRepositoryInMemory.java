@@ -6,12 +6,12 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-class SellerRepositoryInMemory implements SellerRepository {
-    private Map<String, Seller> inMemoryDataBase = new ConcurrentHashMap<>();
+public class SellerRepositoryInMemory implements SellerRepository {
+    private Map<SellerId, Seller> inMemoryDataBase = new ConcurrentHashMap<>();
 
     @Override
     public Seller save(Seller seller) {
-        return inMemoryDataBase.put(seller.id(), seller);
+        return inMemoryDataBase.put(seller.getId(), seller);
     }
 
     @Override

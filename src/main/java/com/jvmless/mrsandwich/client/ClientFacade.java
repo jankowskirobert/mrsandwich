@@ -29,7 +29,7 @@ public class ClientFacade {
     }
 
     public void registerClient(@Valid @NonNull RegisterClientDto dto) {
-        Client client = Client.by(dto);
+        Client client = ClientFactory.createNewClient(dto.getClientId());
         try {
             log.info("New Client: {}", dto.toString());
             Client c = clientRepository.save(client);
@@ -49,37 +49,7 @@ public class ClientFacade {
         });
     }
 
-    public void addSellerToObserverList(@NonNull AddSellerDto dto) {
-        ClientId id = new ClientId(dto.getClientId());
-        Optional<Client> saved = clientRepository.findById(id);
-        saved.ifPresent(x -> {
-            if (x.isEnable()) {
-                x.addSeller(dto.getSellerId());
-                mqSenderPort.clientObserveSellerMessage(dto);
-            } else {
-                throw new ClientDisabledException();
-            }
-        });
-    }
 
-    public void removeSellerFromObserverList(@NonNull RemoveSellerDto dto) {
-        ClientId id = new ClientId(dto.getClientId());
-        Optional<Client> saved = clientRepository.findById(id);
-        saved.ifPresent(x -> {
-            if (x.isEnable()) {
-                x.removeSeller(dto.getSelledId());
-            }
-        });
-    }
-
-    public Set<ObservedSellerDto> getObservedSellers(@NonNull String clientId) {
-        ClientId id = new ClientId(clientId);
-        Optional<Client> saved = clientRepository.findById(id);
-        return saved.map(x -> x.getSellers()).orElse(Collections.emptySet()).stream().map(y -> {
-            ModelMapper modelMapper = new ModelMapper();
-            return modelMapper.map(y, ObservedSellerDto.class);
-        }).collect(Collectors.toSet());
-    }
 
     public void newSellerRegister(NewSeller newSeller) {
         log.info("NEW SELLER");

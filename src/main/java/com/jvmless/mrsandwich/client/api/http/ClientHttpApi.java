@@ -34,19 +34,4 @@ class ClientHttpApi {
         clientFacade.disableClient(dto);
     }
 
-
-    @RequestMapping(path = "/observe", consumes = "application/json", method = RequestMethod.POST)
-    public void observerSeller(@RequestBody AddSellerDto dto) {
-        clientFacade.addSellerToObserverList(dto);
-    }
-
-    @RequestMapping(path = "/observe", consumes = "application/json", method = RequestMethod.DELETE)
-    public void stopWatchingSeller(@RequestBody RemoveSellerDto dto) {
-        clientFacade.removeSellerFromObserverList(dto);
-    }
-
-    @RequestMapping(path = "/observed", produces = "application/json", method = RequestMethod.GET)
-    public List<ObservedSellerDto> listOfWatchedSellers(@RequestParam String clientId) {
-        return new ArrayList<>(clientFacade.getObservedSellers(clientId));
-    }
 }

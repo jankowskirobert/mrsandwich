@@ -51,8 +51,7 @@ public class ClientFacadeTest {
     public void testAddSellerToObserverList(){
         String clientId = UUID.randomUUID().toString();
         String sellerId = UUID.randomUUID().toString();
-        Client client = Client.by(new RegisterClientDto(clientId));
-        client.addSeller(sellerId);
+        Client client = ClientFactory.createNewClient("TEST-CLIENT");
     }
 
     @After

@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 @NoArgsConstructor
-class ClientRepositoryInMemory implements ClientRepository {
+public class ClientRepositoryInMemory implements ClientRepository {
     private Map<String, Client> inMemoryRepository = new ConcurrentHashMap<>();
 
     @Override

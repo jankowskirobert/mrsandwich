@@ -7,6 +7,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class SubscribtionId {
+public class SubscriptionId {
     private String id;
 }
