@@ -21,7 +21,7 @@ public class LocationRepositoryInMemory implements LocationRepository {
     }
 
     @Override
-    public Optional<Location> findById(String id) {
-        return Optional.empty();
+    public Optional<Location> findById(LocationId id) {
+        return Optional.ofNullable(inMemoryRepository.get(id));
     }
 }

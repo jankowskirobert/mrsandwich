@@ -20,9 +20,9 @@ public class MessageFacade {
     public void addNewMessage(CreateMessage addNewMessage) {
         MessageId messageId = MessageId.of(addNewMessage.getMessageId());
         VendorId vendorId = VendorId.of(addNewMessage.getVendorId());
-        if(!sellerRepository.find(addNewMessage.getVendorId()).isPresent()){
-            throw new SellerNotFoundException("Seller not found");
-        }
+//        if(!sellerRepository.find(addNewMessage.getVendorId()).isPresent()){
+//            throw new SellerNotFoundException("Seller not found");
+//        }
         Message newMessage = Message.of(messageId, addNewMessage.getMessageBody(), vendorId, LocalDateTime.now(), addNewMessage.getMessageStatus());
         messageRepository.save(newMessage);
     }

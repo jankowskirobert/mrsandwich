@@ -29,7 +29,7 @@ public class SellerFacade {
 
     public void updateSellerPersonalData(UpdateSellerPersonalDataDto dto) {
         PersonalData personalData = PersonalData.of(dto);
-        Optional<Seller> seller = sellerRepository.find(dto.getSellerId());
+        Optional<Seller> seller = sellerRepository.find(new SellerId(dto.getSellerId()));
         seller.ifPresent(x -> x.updatePersonalData(personalData));
     }
 
@@ -37,7 +37,7 @@ public class SellerFacade {
         return sellerRepository.findAllAvailableSellers().stream().map(x -> mapper.map(x, SellerDto.class)).collect(Collectors.toList());
     }
 
-    public SellerDto getSeller(@NonNull String sellerId) {
+    public SellerDto getSeller(@NonNull SellerId sellerId) {
         return mapper.map(
                 sellerRepository.find(sellerId).orElseThrow(
                         () -> new SellerNotFoundException(String.format("Cannot find vendor with id: %s", sellerId))

@@ -17,7 +17,7 @@ class SellerRepositoryMongoAdapter implements SellerRepository {
     }
 
     @Override
-    public Optional<Seller> find(String sellerId) {
+    public Optional<Seller> find(SellerId sellerId) {
         return sellerRepositoryMongoDb.findById(sellerId);
     }
 

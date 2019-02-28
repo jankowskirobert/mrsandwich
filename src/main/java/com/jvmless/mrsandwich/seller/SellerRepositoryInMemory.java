@@ -15,7 +15,7 @@ public class SellerRepositoryInMemory implements SellerRepository {
     }
 
     @Override
-    public Optional<Seller> find(String sellerId) {
+    public Optional<Seller> find(SellerId sellerId) {
         return Optional.ofNullable(inMemoryDataBase.get(sellerId));
     }
 
