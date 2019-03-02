@@ -45,4 +45,24 @@ public class SubscriptionTests {
 
         handler.handle(subscribeToSeller);
     }
+    @Test(expected = IllegalArgumentException.class)
+    public void testSubscription_sellerNotHandleLocation() {
+        Location locationHandled = new Location(new LocationId("locationId"));
+        Location unhandled = new Location(new LocationId("locationId_2"));
+
+        locationRepository.save(locationHandled);
+        Seller seller = SellerFactory.createNeSeller("sellerId", unhandled);
+        sellerRepository.save(seller);
+        Client client = ClientFactory.createNewClient("clientId");
+        clientRepository.save(client);
+
+
+        SubscribeToSeller subscribeToSeller = new SubscribeToSeller();
+        subscribeToSeller.setClientId(client.id());
+        subscribeToSeller.setLocationId(locationHandled.getLocationId().getId());
+        subscribeToSeller.setSellerId(seller.getId().getId());
+        subscribeToSeller.setSubscriptionId("SUB-1");
+
+        handler.handle(subscribeToSeller);
+    }
 }
