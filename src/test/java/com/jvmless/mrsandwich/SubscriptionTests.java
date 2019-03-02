@@ -36,6 +36,7 @@ public class SubscriptionTests {
         Client client = ClientFactory.createNewClient("clientId");
         clientRepository.save(client);
 
+
         SubscribeToSeller subscribeToSeller = new SubscribeToSeller();
         subscribeToSeller.setClientId(client.id());
         subscribeToSeller.setLocationId(location.getLocationId().getId());

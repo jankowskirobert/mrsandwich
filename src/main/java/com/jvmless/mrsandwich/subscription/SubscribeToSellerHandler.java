@@ -37,6 +37,8 @@ public class SubscribeToSellerHandler {
                     clientLocation
             );
             subscriptionRepository.save(subscription);
+        } else {
+            throw new IllegalArgumentException("Seller cannot handle given location");
         }
     }
 }
