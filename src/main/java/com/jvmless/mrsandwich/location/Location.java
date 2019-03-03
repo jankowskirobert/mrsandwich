@@ -6,5 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Location {
-    private LocationId locationId;
+    private LocationId locationName;
+    private GeoPosition position;
+    private Address address;
 }

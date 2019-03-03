@@ -21,20 +21,21 @@ public class Seller {
     private SellerId id;
     private PersonalData personalData;
     private List<Location> handlingTargetLocations;
-    private LocalDateTime personalDataUpdateTime;
 
    protected Seller (SellerId sellerId, List<Location> locations) {
         this.id = sellerId;
         this.handlingTargetLocations = locations;
     }
 
-    public void updatePersonalData(PersonalData personalData) {
-        this.personalDataUpdateTime = LocalDateTime.now();
-        this.personalData = personalData;
-    }
-
     public boolean isHandlingLocation(Location location) {
         return handlingTargetLocations.contains(location);
     }
 
+    public void addHandlingLocation(Location location) {
+       handlingTargetLocations.add(location);
+    }
+
+    public void removeLocation(Location location) {
+       handlingTargetLocations.remove(location);
+    }
 }

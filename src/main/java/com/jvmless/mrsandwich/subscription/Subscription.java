@@ -8,21 +8,24 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 //Agregat
+/*
+can only handle client rules, so for example client can only have 3 subscriptions
+ */
 @Data
 public class Subscription {
     private SubscriptionId subscriptionId;
-    private Client clientId;
-    private Seller sellerId;
-    private Location locationId;
+    private Client client;
+    private Seller seller;
+    private Location location;
     private SubscriptionStatus subscriptionStatus;
     private LocalDateTime subscriptionStart;
     private LocalDateTime subscriptionEnd;
 
-    public Subscription(SubscriptionId subscriptionId, Client clientId, Seller sellerId, Location locationId) {
+    public Subscription(SubscriptionId subscriptionId, Client client, Seller seller, Location location) {
         this.subscriptionId = subscriptionId;
-        this.clientId = clientId;
-        this.sellerId = sellerId;
-        this.locationId = locationId;
+        this.client = client;
+        this.seller = seller;
+        this.location = location;
         this.subscriptionStatus = SubscriptionStatus.ACTIVATED;
         this.subscriptionStart = LocalDateTime.now();
     }

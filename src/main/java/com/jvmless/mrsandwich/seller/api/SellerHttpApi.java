@@ -22,7 +22,7 @@ class SellerHttpApi {
 
     @RequestMapping(path = "/{id}", produces = "application/json", method = RequestMethod.GET)
     public SellerDto getSeller(@PathVariable(name = "id", required = true) String sellerId) {
-//        return sellerFacade.getSeller(sellerId);
+//        return sellerFacade.getSeller(seller);
         return null;
     }
 

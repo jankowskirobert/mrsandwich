@@ -12,7 +12,7 @@ public class LocationRepositoryInMemory implements LocationRepository {
 
     @Override
     public Location save(Location location) {
-        return inMemoryRepository.put(location.getLocationId(), location);
+        return inMemoryRepository.put(location.getLocationName(), location);
     }
 
     @Override
