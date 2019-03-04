@@ -9,10 +9,7 @@ import com.jvmless.mrsandwich.location.LocationId;
 import com.jvmless.mrsandwich.location.LocationRepository;
 import com.jvmless.mrsandwich.location.LocationRepositoryInMemory;
 import com.jvmless.mrsandwich.seller.*;
-import com.jvmless.mrsandwich.subscription.InMemorySubscriptionRepositoryAdapter;
-import com.jvmless.mrsandwich.subscription.SubscribeToSeller;
-import com.jvmless.mrsandwich.subscription.SubscribeToSellerHandler;
-import com.jvmless.mrsandwich.subscription.SubscriptionRepository;
+import com.jvmless.mrsandwich.subscription.*;
 import org.junit.Test;
 
 public class SubscriptionTests {
@@ -45,6 +42,7 @@ public class SubscriptionTests {
 
         handler.handle(subscribeToSeller);
     }
+
     @Test(expected = IllegalArgumentException.class)
     public void testSubscription_sellerNotHandleLocation() {
         Location locationHandled = new Location(new LocationId("locationName"));
@@ -64,5 +62,14 @@ public class SubscriptionTests {
         subscribeToSeller.setSubscriptionId("SUB-1");
 
         handler.handle(subscribeToSeller);
+    }
+
+    @Test
+    public void testSubscriber() {
+        Client client = ClientFactory.createNewClient("client");
+        Location locationHandled = new Location(new LocationId("locationName"));
+        Seller seller = SellerFactory.createNeSeller("seller", locationHandled);
+        Subscriber subscriber = SubscriberFactory.create(client);
+        subscriber.subscribe(seller, locationHandled);
     }
 }

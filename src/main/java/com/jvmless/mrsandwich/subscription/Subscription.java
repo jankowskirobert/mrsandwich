@@ -14,16 +14,14 @@ can only handle client rules, so for example client can only have 3 subscription
 @Data
 public class Subscription {
     private SubscriptionId subscriptionId;
-    private Client client;
     private Seller seller;
     private Location location;
     private SubscriptionStatus subscriptionStatus;
     private LocalDateTime subscriptionStart;
     private LocalDateTime subscriptionEnd;
 
-    public Subscription(SubscriptionId subscriptionId, Client client, Seller seller, Location location) {
+    protected Subscription(SubscriptionId subscriptionId, Client client, Seller seller, Location location) {
         this.subscriptionId = subscriptionId;
-        this.client = client;
         this.seller = seller;
         this.location = location;
         this.subscriptionStatus = SubscriptionStatus.ACTIVATED;

@@ -9,4 +9,8 @@ public class Location {
     private LocationId locationName;
     private GeoPosition position;
     private Address address;
+
+    public Location(LocationId locationName) {
+        this.locationName = locationName;
+    }
 }

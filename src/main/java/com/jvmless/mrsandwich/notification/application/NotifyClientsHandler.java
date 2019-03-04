@@ -8,6 +8,8 @@ import com.jvmless.mrsandwich.receiver.ReceiverRepository;
 import com.jvmless.mrsandwich.message.Message;
 import com.jvmless.mrsandwich.message.MessageNotFoundException;
 import com.jvmless.mrsandwich.message.MessageRepository;
+import com.jvmless.mrsandwich.subscription.SubscriberRepository;
+import com.jvmless.mrsandwich.subscription.SubscriptionRepository;
 import lombok.NonNull;
 
 import java.util.Optional;
@@ -20,6 +22,8 @@ public class NotifyClientsHandler {
     private ReceiverRepository receiverRepository;
     private NotificationSenderRepository notificationSenderRepository;
     private NotificationSenderPort notificationSenderPort;
+    private SubscriptionRepository subscriptionRepository;
+    private SubscriberRepository subscriberRepository;
 
     public NotifyClientsHandler(NotificationRepository notificationRepository,
                                 MessageRepository messageRepository,
