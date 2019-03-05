@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 public class Subscriber {
 
     private SubscriberId subscriberId;
-    private List<Subscription> currentSubscriptions;
+    private List<Subscription> subscriptions;
     private SubscriberPolicy policy; // eventually here or in subscription
     private Client client;
 
@@ -22,13 +22,18 @@ public class Subscriber {
     }
 
     public void subscribe(Seller seller, Location location) {
-        Optional<Subscription> already = find(seller, location);
-        if (already.isPresent())
+        if (isSubscribing(seller, location))
             throw new IllegalArgumentException("Already subscribed");
         else {
-            currentSubscriptions.add(new Subscription(SubscriptionId.random(), client, seller, location));
+            subscriptions.add(new Subscription(SubscriptionId.random(), client, seller, location));
         }
     }
+
+    public boolean isSubscribing(Seller seller, Location location) {
+        Optional<Subscription> already = find(seller, location);
+        return already.isPresent();
+    }
+
     public void unsubscribe(SubscriptionId subscriptionId) {
         Optional<Subscription> already = getSubscriptionStream(subscriptionId).findFirst();
         if(!already.isPresent())
@@ -40,11 +45,11 @@ public class Subscriber {
     }
 
     private Stream<Subscription> getSubscriptionStream(SubscriptionId subscriptionId) {
-        return currentSubscriptions.stream().filter(x -> x.getSubscriptionId().equals(subscriptionId));
+        return subscriptions.stream().filter(x -> x.getSubscriptionId().equals(subscriptionId));
     }
 
     private Optional<Subscription> find(Seller seller, Location location) {
-        return currentSubscriptions.stream().filter(x-> x.getSeller().equals(seller) && x.getLocation().equals(location)).findAny();
+        return subscriptions.stream().filter(x-> x.getSeller().equals(seller) && x.getLocation().equals(location)).findAny();
     }
 
 }
