@@ -1,6 +1,9 @@
 package com.jvmless.mrsandwich.notification;
 
+import com.jvmless.mrsandwich.client.publication.PublisherId;
 import com.jvmless.mrsandwich.message.TargetId;
+import com.jvmless.mrsandwich.subscription.Subscriber;
+import com.jvmless.mrsandwich.subscription.SubscriberId;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,32 +16,9 @@ import java.util.List;
 public class Notification {
     @Id
     private NotificationId notificationId;
-    private List<Recipient> receivers = new ArrayList<>();
-    private TargetId target;
-    private Vendor vendor;
-    private MessageDetails message;
-    private NotificationStatus status;
+    private SubscriberId subscriber;
+    private PublisherId publisherId;
 
 
-    public Notification(NotificationId notificationId, Vendor vendor, MessageDetails message) {
-        this.notificationId = notificationId;
-        this.message = message;
-        this.vendor = vendor;
-        this.status = NotificationStatus.WAITING;
-    }
 
-    public void addReceiver(Recipient receiver) {
-        if(receivers.contains(receiver))
-            throw new IllegalArgumentException("Receiver already signed");
-        else
-            receivers.add(receiver);
-    }
-
-    public int countRecivers() {
-        return receivers.size();
-    }
-
-    public void delivered() {
-        this.status = NotificationStatus.FINISHED_SENDING;
-    }
 }
