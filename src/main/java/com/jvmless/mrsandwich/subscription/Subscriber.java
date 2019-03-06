@@ -1,13 +1,16 @@
 package com.jvmless.mrsandwich.subscription;
 
 import com.jvmless.mrsandwich.client.Client;
+import com.jvmless.mrsandwich.client.publication.PublisherId;
 import com.jvmless.mrsandwich.location.Location;
 import com.jvmless.mrsandwich.seller.Seller;
+import lombok.Getter;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+@Getter
 public class Subscriber {
 
     private SubscriberId subscriberId;
@@ -21,16 +24,16 @@ public class Subscriber {
         this.client = client;
     }
 
-    public void subscribe(Seller seller, Location location) {
-        if (isSubscribing(seller, location))
+    public void subscribe(PublisherId publisherId, Location location) {
+        if (isSubscribing(publisherId, location))
             throw new IllegalArgumentException("Already subscribed");
         else {
-            subscriptions.add(new Subscription(SubscriptionId.random(), client, seller, location));
+            subscriptions.add(new Subscription(SubscriptionId.random(), client, publisherId, location));
         }
     }
 
-    public boolean isSubscribing(Seller seller, Location location) {
-        Optional<Subscription> already = find(seller, location);
+    public boolean isSubscribing(PublisherId publisherId, Location location) {
+        Optional<Subscription> already = find(publisherId, location);
         return already.isPresent();
     }
 
@@ -48,8 +51,8 @@ public class Subscriber {
         return subscriptions.stream().filter(x -> x.getSubscriptionId().equals(subscriptionId));
     }
 
-    private Optional<Subscription> find(Seller seller, Location location) {
-        return subscriptions.stream().filter(x-> x.getSeller().equals(seller) && x.getLocation().equals(location)).findAny();
+    private Optional<Subscription> find(PublisherId publisherId, Location location) {
+        return subscriptions.stream().filter(x-> x.getPublisherId().equals(publisherId) && x.getLocation().equals(location)).findAny();
     }
 
 }
